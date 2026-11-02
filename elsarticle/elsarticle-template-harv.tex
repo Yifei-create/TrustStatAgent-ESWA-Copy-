@@ -51,7 +51,7 @@
 
 %% Abstract
 \begin{abstract}
-Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a confidence threshold tuned once on validation data, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. To address these limitations, this paper presents TrustStatAgent: a tool-restricted LLM plans the analysis and routes every computation through statistical tools; conformal calibration turns each candidate into an interval or label set with finite-sample coverage; and a deterministic gate releases a result only when its execution checks pass and the calibrated output lies inside the task's acceptance region, referring the rest to human review. The model that produces a number never decides whether that number is published, and every referred result carries the condition it failed. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, and it attains the lowest released error rate among the compared policies on all three predictive benchmarks. Against gating on the model's self-reported confidence, the calibrated gate releases about twice as many StatQA candidates at a comparable released error rate, because a trained correctness score separates right from wrong answers far better than the model's own assessment (validation AUC 0.94 against 0.62). Base task accuracy is retained at 73.00\% and 84.67\%.} The gain is not free: between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review, and forecasting automation falls by 10.4 percentage points against conventional gating. The release rate accompanies every reliability figure, so an operator can weigh the exchange against the ratio of the cost of a published violation to a referral.
+Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent: a tool-restricted LLM plans the analysis and routes every computation through statistical tools; conformal calibration turns each candidate into an interval or label set with finite-sample coverage; and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is not free: between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review; the release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
 \end{abstract}
 
 %%Graphical abstract
@@ -134,6 +134,17 @@ Building on these studies, TrustStatAgent is designed as a calibration and relea
 \label{sec:methodology}
 This section describes TrustStatAgent, a workflow for deciding when statistical results can be released automatically. As illustrated in Fig.~\ref{fig:framework}, it combines LLM task planning and statistical tool execution, uncertainty calibration, and a risk gate. We first define the overall framework, then describe these three components in turn.
 
+\begin{figure}[!tbp]
+    \centering
+    \includegraphics[width=0.92\linewidth]{figures/download.png}
+    \caption{Overall architecture of TrustStatAgent.
+    Solid arrows denote task information, candidate results, or execution evidence; dashed arrows denote calibration resources and release configurations.
+    Statistical computation, calibration, and gating are performed by programs.
+    Unresolved execution failures or unavailable conformal outputs lead to human review.
+    Calibration labels remain outside the LLM interaction, and test labels are used only for evaluation.}
+    \label{fig:framework}
+\end{figure}
+
 \subsection{Framework and task formulation}
 \label{sec:framework}
 
@@ -145,18 +156,6 @@ TrustStatAgent separates task planning and statistical execution, uncertainty ca
     \label{eq:framework}
 \end{equation}
 where $\theta$ denotes the language-model configuration, $\tau$ is the task type, $\alpha$ is the nominal miscoverage level, and $\Omega$ contains task-specific acceptance criteria. The LLM interprets the request and specifies the analysis; authorized programs perform numerical computation and retain execution evidence. A result is released only when its calibrated output and execution status meet the prespecified criteria. We evaluate this design on three predictive tasks and one structured statistical question-answering task, with task-specific implementations described below.
-
-\begin{figure}[!htbp]
-    \centering
-    % Replace the filename and uncomment this line after adding your image.
-    \includegraphics[width=\linewidth]{figures/download.png}
-    \caption{Overall architecture of TrustStatAgent.
-    Solid arrows denote task information, candidate results, or execution evidence; dashed arrows denote calibration resources and release configurations.
-    Statistical computation, calibration, and gating are performed by programs.
-    Unresolved execution failures or unavailable conformal outputs lead to human review.
-    Calibration labels remain outside the LLM interaction, and test labels are used only for evaluation.}
-    \label{fig:framework}
-\end{figure}
 
 \subsection{Task planning and statistical tool execution}
 \label{sec:execution}
@@ -394,25 +393,17 @@ resulting conditions.
     require successful execution and a valid uncertainty output.}
     \label{tab:calibrated_release_conditions}
     \small
-    \setlength{\tabcolsep}{3pt}
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{
-        @{}
-        >{\raggedright\arraybackslash}p{0.24\columnwidth}
-        >{\raggedright\arraybackslash}p{0.25\columnwidth}
-        >{\raggedright\arraybackslash}X
-        @{}
-    }
+    \begin{tabular}{@{}lll@{}}
         \toprule
-        Output type
-        & Calibrated output
-        & Release condition \\
+        \textbf{Output type}
+        & \textbf{Calibrated output}
+        & \textbf{Release condition} \\
         \midrule
 
         Regression
         & \([L_i,U_i]\)
-        & \(L_i\geq\widehat y_i-\Delta\),\newline
-          \(U_i\leq\widehat y_i+\Delta\) \\
+        & \(L_i\geq\widehat y_i-\Delta\), \(U_i\leq\widehat y_i+\Delta\) \\
 
         Classification
         & Class set \(C_i\)
@@ -427,7 +418,7 @@ resulting conditions.
         & \(q_{\alpha,t}\leq\Delta\) \\
 
         \bottomrule
-    \end{tabularx}
+    \end{tabular}
 \end{table}
 
 The gate automatically releases a candidate when execution
@@ -486,10 +477,10 @@ Four benchmarks are selected to examine different forms of statistical output an
 
     \begin{tabularx}{\linewidth}{
         @{}
+        >{\raggedright\arraybackslash}p{0.14\linewidth}
         >{\raggedright\arraybackslash}p{0.17\linewidth}
-        >{\raggedright\arraybackslash}p{0.20\linewidth}
         >{\raggedright\arraybackslash}X
-        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}p{0.27\linewidth}
         @{}
     }
         \toprule
@@ -506,7 +497,7 @@ Four benchmarks are selected to examine different forms of statistical output an
 
         California Housing
         & Numerical regression
-        & Point prediction and preliminary quantile interval
+        & Point prediction with preliminary quantile interval
         & Conformalized prediction interval \\
 
         Adult
@@ -516,8 +507,8 @@ Four benchmarks are selected to examine different forms of statistical output an
 
         Carbon Monitor
         & Temporal forecasting
-        & Forecast at a fixed horizon
-        & Rolling residual-based interval \\
+        & Fixed-horizon forecast
+        & Rolling residual interval \\
 
         \bottomrule
     \end{tabularx}
@@ -697,9 +688,9 @@ When both correct and erroneous candidates are present, releasing every candidat
 
     \begin{tabularx}{\linewidth}{
         @{}
-        >{\raggedright\arraybackslash}p{0.24\linewidth}
+        >{\raggedright\arraybackslash}p{0.21\linewidth}
         >{\raggedright\arraybackslash}X
-        >{\raggedright\arraybackslash}p{0.28\linewidth}
+        >{\raggedright\arraybackslash}p{0.27\linewidth}
         @{}
     }
         \toprule
@@ -1265,15 +1256,12 @@ Two assumptions carry most of the theoretical weight, and both are weaker than t
 Coverage is marginal and conditional on exchangeability, which holds approximately for the tabular tasks and is explicitly not claimed for the temporal one; online conformal methods are the natural replacement for the rolling rule \citep{angelopoulos2024online}.
 On StatQA the calibration units are benchmark items that differ in difficulty and in the number of admissible methods, so exchangeability across items is itself an approximation, and stratification by task type would relax it.
 The bound of Eq.~\eqref{eq:release_violation_inclusion} is likewise a joint-event statement; the error rate among released results remains an empirical quantity, computed on the subset selected by the gate.
-
-Coverage is reported as a realised quantity rather than against a target restated here.
-The nominal level of each task is a configuration entry selected on the validation split, so the values of Table~\ref{tab:calibration_discrimination} are to be compared against that entry in the released configuration.
-This is a reporting choice and not a weakening of the guarantee, which is stated in Section~\ref{sec:uncertainty_calibration} in terms of $\alpha$ and holds for the procedure whatever value $\alpha$ takes.
+The nominal coverage level of each task is a configuration entry selected on the validation split; this is a reporting choice and does not weaken the guarantee, which holds for the procedure whatever value $\alpha$ takes.
 
 \textcolor{blue}{The reported figures average over repeated data-splitting seeds, seven for StatQA and three for the predictive benchmarks, which quantifies the variation induced by calibration and validation partitioning.
-Two limitations remain.
-First, the StatQA comparison with conventional gating is a tie in error control: the released error rates overlap across seeds, 3.82$\pm$1.04\% against 3.49$\pm$1.03\%, and the case for the calibrated rule on that benchmark rests on its higher release rate, its large margin over verbalized-confidence gating, and the finite-sample basis of its operating point rather than on an error advantage.
-Second, the language-model candidates are generated once at temperature zero and then frozen, so the repetition varies the evaluation protocol but not the generator; the sampling variability of the model itself is not quantified.
+Two scope conditions remain.
+The StatQA comparison with conventional gating is a tie in error control: the released error rates overlap across seeds, 3.82$\pm$1.04\% against 3.49$\pm$1.03\%, and the case for the calibrated rule on that benchmark rests on its higher release rate, its large margin over verbalized-confidence gating, and the finite-sample basis of its operating point.
+And the language-model candidates are generated once at temperature zero and then frozen, so the repetition varies the evaluation protocol rather than the generator itself.
 The conclusions therefore rest on the effects that persist across seeds: the order-of-magnitude reduction against unrestricted publication, the lowest released error rate on all three predictive benchmarks, and the complete failure of the conventional rule on Carbon Monitor.}
 The tolerance parameter $\Delta$ is prescribed rather than learned, and Fig.~\ref{fig:frontier} characterises its effect along one axis only, so a sensitivity analysis across tasks is still needed before the operating point can be recommended as a default.
 Finally, the StatQA correctness scorer is a TF--IDF logistic regression frozen after training on a dedicated split (Section~\ref{sec:execution}).
@@ -1303,7 +1291,7 @@ Second, the operating point should be derived from a stated cost ratio rather th
 Third, the workflow should be tested on tasks whose correctness depends on several modelling decisions at once, such as model diagnostics and multiple-testing corrections, where the acceptance region is harder to specify than an error band but where the same separation between generation and release applies.
 
 
-\textcolor{blue}{\section*{Data availability}
+{\color{blue}\section*{Data availability}
 The complete implementation of TrustStatAgent, including the evaluation pipelines, the frozen StatQA candidate outputs, the multi-seed evaluation scripts, and the configuration files underlying every reported figure, is publicly available at \url{https://github.com/Yifei-create/TrustStatAgent}.}
 
 {\color{blue}
