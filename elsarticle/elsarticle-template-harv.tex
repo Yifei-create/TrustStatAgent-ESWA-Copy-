@@ -700,7 +700,7 @@ When both correct and erroneous candidates are present, releasing every candidat
 \subsection{Comparative methods}
 \label{sec:comparative_methods}
 
-The comparative evaluation includes a reasoning-only baseline, a tool-using baseline, and a conventional release-control baseline. This design separates the benefit of tool-assisted statistical execution from the benefit of calibrated release decisions. The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
+\textcolor{blue}{The comparative evaluation includes a tool-using baseline and a conventional release-control baseline. Together with the ablation variants of Section~\ref{sec:ablation_studies}, this design separates the contribution of calibrated release decisions from that of the underlying candidate pipeline.} The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
 
 \begin{table}[H]
     \centering
@@ -721,10 +721,6 @@ The comparative evaluation includes a reasoning-only baseline, a tool-using base
         & \textbf{Configuration}
         & \textbf{Comparison purpose} \\
         \midrule
-
-        Zero-shot-CoT
-        & Reasoning without statistical tool calls
-        & Evaluate tool-assisted execution on StatQA \\
 
         ReAct Statistical Agent
         & ReAct-style tool use without conformal calibration
