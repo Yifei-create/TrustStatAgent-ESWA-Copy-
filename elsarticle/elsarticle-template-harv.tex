@@ -1307,10 +1307,10 @@ The counts correspond to the reference seed, which reuses the official stratifie
     \centering
     \caption{Raw confusion counts on the test partitions at the reference seed. StatQA has 464 test items, Adult 15{,}060, California Housing 4{,}128, and Carbon Monitor 202.}
     \label{tab:raw_counts}
-    \scriptsize
-    \setlength{\tabcolsep}{3pt}
+    \small
+    \setlength{\tabcolsep}{7pt}
     \renewcommand{\arraystretch}{1.15}
-    \begin{tabularx}{\linewidth}{@{}Xlrrrr@{}}
+    \begin{tabular}{@{}llrrrr@{}}
         \toprule
         \textbf{Benchmark} & \textbf{Policy} & \textbf{TP} & \textbf{FN} & \textbf{TN} & \textbf{FP} \\
         \midrule
@@ -1321,20 +1321,20 @@ The counts correspond to the reference seed, which reuses the official stratifie
                & w/o risk gate & 0 & 126 & 338 & 0 \\
                & Publish all (ReAct) & 0 & 131 & 333 & 0 \\
         \midrule
-        Adult & TrustStatAgent & 2087 & 222 & 7954 & 4797 \\
-              & Conventional gating & 2032 & 277 & 8335 & 4416 \\
-              & w/o risk gate & 0 & 2309 & 12751 & 0 \\
+        Adult & TrustStatAgent & 2{,}087 & 222 & 7{,}954 & 4{,}797 \\
+              & Conventional gating & 2{,}032 & 277 & 8{,}335 & 4{,}416 \\
+              & w/o risk gate & 0 & 2{,}309 & 12{,}751 & 0 \\
         \midrule
-        Calif. Housing & TrustStatAgent & 132 & 49 & 2578 & 1369 \\
-              & Conventional gating & 125 & 56 & 2719 & 1228 \\
-              & w/o conformal calibration & 131 & 50 & 2608 & 1339 \\
-              & w/o risk gate & 0 & 181 & 3947 & 0 \\
+        Calif. Housing & TrustStatAgent & 132 & 49 & 2{,}578 & 1{,}369 \\
+              & Conventional gating & 125 & 56 & 2{,}719 & 1{,}228 \\
+              & w/o conformal calibration & 131 & 50 & 2{,}608 & 1{,}339 \\
+              & w/o risk gate & 0 & 181 & 3{,}947 & 0 \\
         \midrule
         Carbon Monitor & TrustStatAgent & 2 & 5 & 152 & 43 \\
               & Conventional gating & 0 & 7 & 171 & 24 \\
               & w/o risk gate & 0 & 7 & 195 & 0 \\
         \bottomrule
-    \end{tabularx}
+    \end{tabular}
 \end{table}
 
 Two features of the table are worth reading directly.
@@ -1394,9 +1394,9 @@ The released error rate stays at or below 3.6\% in every category in which any c
     \caption{Per-category behaviour of TrustStatAgent on the StatQA test partition at the reference seed (464 items). Released error rate is computed within the released subset of each category.}
     \label{tab:statqa_categories}
     \small
-    \setlength{\tabcolsep}{4pt}
+    \setlength{\tabcolsep}{7pt}
     \renewcommand{\arraystretch}{1.15}
-    \begin{tabularx}{\linewidth}{@{}Xrrrr@{}}
+    \begin{tabular}{@{}lrrrr@{}}
         \toprule
         \textbf{Task category} & \textbf{$n$} & \textbf{Accuracy (\%)} & \textbf{Release (\%)} & \textbf{Released err. (\%)} \\
         \midrule
@@ -1406,7 +1406,7 @@ The released error rate stays at or below 3.6\% in every category in which any c
         Distribution Compliance Test & 95 & 44.2 & 20.0 & 0.0 \\
         Variance Test & 97 & 86.6 & 86.6 & 3.6 \\
         \bottomrule
-    \end{tabularx}
+    \end{tabular}
 \end{table}
 }
 
