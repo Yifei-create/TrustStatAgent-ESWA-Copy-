@@ -686,7 +686,7 @@ When both correct and erroneous candidates are present, releasing every candidat
 \subsection{Comparative methods}
 \label{sec:comparative_methods}
 
-\textcolor{blue}{The comparative evaluation includes a tool-using baseline and two release-control baselines, one built on a validation-tuned confidence threshold and one on the model's verbally reported confidence~\citep{kadavath2022language}. Together with the ablation variants of Section~\ref{sec:ablation_studies}, this design separates the contribution of calibrated release decisions from that of the underlying candidate pipeline and from that of the confidence signal being gated on.} The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
+\textcolor{blue}{The comparative evaluation includes a tool-using baseline and two release-control baselines, one built on a validation-tuned confidence threshold and one on the model's verbally reported confidence~\citep{kadavath2022language}. The verbalized baseline presupposes a generated answer to self-assess and is therefore evaluated on StatQA, the benchmark whose candidates are produced by the language model. Together with the ablation variants of Section~\ref{sec:ablation_studies}, this design separates the contribution of calibrated release decisions from that of the underlying candidate pipeline and from that of the confidence signal being gated on.} The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
 
 \begin{table}[H]
     \centering
