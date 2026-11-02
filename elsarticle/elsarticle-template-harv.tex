@@ -166,7 +166,7 @@ For each predictive task, the model configuration and preprocessing procedures a
 Figure~\ref{fig:planning_execution} illustrates this
 workflow using a house-value prediction request.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{sci1.png}
     \caption{LLM task planning and statistical tool execution}
@@ -216,7 +216,7 @@ task setting.
 Figure~\ref{fig:conformal_calibration} summarizes the four
 task-specific calibration procedures described below.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{sci2.png}
     \caption{Task-specific conformal uncertainty calibration.}
@@ -429,7 +429,7 @@ to these predefined rules.
 Figure~\ref{fig:risk_gating} illustrates the checks,
 acceptance tests, and routing decisions of the release gate.
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{sci3.png}
     \caption{Risk gating and selective release.}
@@ -473,14 +473,15 @@ Four benchmarks are selected to examine different forms of statistical output an
     \caption{Benchmark tasks and uncertainty representations}
     \label{tab:benchmark_tasks}
     \small
+    \setlength{\tabcolsep}{4pt}
     \renewcommand{\arraystretch}{1.2}
 
     \begin{tabularx}{\linewidth}{
         @{}
-        >{\raggedright\arraybackslash}p{0.14\linewidth}
-        >{\raggedright\arraybackslash}p{0.17\linewidth}
+        l
+        >{\raggedright\arraybackslash}p{0.16\linewidth}
         >{\raggedright\arraybackslash}X
-        >{\raggedright\arraybackslash}p{0.27\linewidth}
+        >{\raggedright\arraybackslash}p{0.26\linewidth}
         @{}
     }
         \toprule
@@ -1307,9 +1308,9 @@ The counts correspond to the reference seed, which reuses the official stratifie
     \centering
     \caption{Raw confusion counts on the test partitions at the reference seed. StatQA has 464 test items, Adult 15{,}060, California Housing 4{,}128, and Carbon Monitor 202.}
     \label{tab:raw_counts}
-    \small
+    \footnotesize
     \setlength{\tabcolsep}{7pt}
-    \renewcommand{\arraystretch}{1.15}
+    \renewcommand{\arraystretch}{1.12}
     \begin{tabular}{@{}llrrrr@{}}
         \toprule
         \textbf{Benchmark} & \textbf{Policy} & \textbf{TP} & \textbf{FN} & \textbf{TN} & \textbf{FP} \\
@@ -1398,7 +1399,7 @@ The released error rate stays at or below 3.6\% in every category in which any c
     \renewcommand{\arraystretch}{1.15}
     \begin{tabular}{@{}lrrrr@{}}
         \toprule
-        \textbf{Task category} & \textbf{$n$} & \textbf{Accuracy (\%)} & \textbf{Release (\%)} & \textbf{Released err. (\%)} \\
+        \textbf{Task category} & \textbf{$n$} & \textbf{Acc. (\%)} & \textbf{Rel. (\%)} & \textbf{Rel. err. (\%)} \\
         \midrule
         Contingency Table Test & 103 & 80.6 & 33.0 & 0.0 \\
         Correlation Analysis & 66 & 50.0 & 0.0 & --- \\
