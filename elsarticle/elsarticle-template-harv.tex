@@ -1,43 +1,15 @@
-%% 
-%% Copyright 2007-2024 Elsevier Ltd
-%% 
-%% This file is part of the 'Elsarticle Bundle'.
-%% ---------------------------------------------
-%% 
-%% It may be distributed under the conditions of the LaTeX Project Public
-%% License, either version 1.3 of this license or (at your option) any
-%% later version.  The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 1999/12/01 or later.
-%% 
-%% The list of all files belonging to the 'Elsarticle Bundle' is
-%% given in the file `manifest.txt'.
-%% 
-%% Template article for Elsevier's document class `elsarticle'
-%% with harvard style bibliographic references
-
 \documentclass[preprint,12pt,authoryear]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
-%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
-%% for a journal layout:
-%% \documentclass[final,1p,times,authoryear]{elsarticle}
-%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
-%% \documentclass[final,3p,times,authoryear]{elsarticle}
-%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
-%% \documentclass[final,5p,times,authoryear]{elsarticle}
-%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
-
-%% For including figures, graphicx.sty has been loaded in
-%% elsarticle.cls. If you prefer to use the old commands
-%% please give \usepackage{epsfig}
-
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{array}
+\usepackage{caption}
+\captionsetup[table]{skip=8pt}
+\usepackage{microtype}
+\emergencystretch=1em
 
 \providecommand{\code}[1]{\texttt{#1}}
 
@@ -54,7 +26,7 @@
 %% \usepackage{lineno}
 \usepackage[colorlinks=true,allcolors=blue]{hyperref}
 
-\journal{Nuclear Physics B}
+\journal{\textcolor{blue}{Expert Systems with Applications}}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -65,48 +37,7 @@
 
 \begin{frontmatter}
 
-%% Title, authors and addresses
-
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for theassociated footnote;
-%% use the fnref command within \author or \affiliation for footnotes;
-%% use the fntext command for theassociated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for theassociated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \affiliation{organization={},
-%%            addressline={}, 
-%%            city={},
-%%            postcode={}, 
-%%            state={},
-%%            country={}}
-%% \fntext[label3]{}
-
-\title{} %% Article title
-
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \affiliation[label1]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
-%%
-%% \affiliation[label2]{organization={},
-%%             addressline={},
-%%             city={},
-%%             postcode={},
-%%             state={},
-%%             country={}}
+\title{\textcolor{blue}{TrustStatAgent: Conformally calibrated release decisions for large language model statistical agents}}
 
 \author{} %% Author name
 
@@ -125,36 +56,27 @@ Delegating statistical analysis to large language model (LLM) agents is attracti
 
 %%Graphical abstract
 \begin{graphicalabstract}
-%\includegraphics{grabs}
+\textcolor{blue}{\includegraphics[width=\linewidth]{figures/download.png}}
 \end{graphicalabstract}
 
 %%Research highlights
 \begin{highlights}
-\item Research highlight 1
-\item Research highlight 2
+\item \textcolor{blue}{A statistical agent that separates result generation from result release}
+\item \textcolor{blue}{Conformal calibration attaches finite-sample coverage to each result}
+\item \textcolor{blue}{A deterministic gate releases only results inside acceptance regions}
+\item \textcolor{blue}{Released error falls from 27.16\% to 1.87\% on StatQA at 46.12\% release}
+\item \textcolor{blue}{On Carbon Monitor, conventional gating intercepts no error at all}
 \end{highlights}
 
 %% Keywords
 \begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
-
-%% PACS codes here, in the form: \PACS code \sep code
-
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-
+{\color{blue}
+Large language model agents \sep Conformal prediction \sep Selective prediction \sep Uncertainty quantification \sep Statistical analysis \sep Risk control
+}
 \end{keyword}
 
 \end{frontmatter}
 
-%% Add \usepackage{lineno} before \begin{document} and uncomment 
-%% following line to enable line numbers
-%% \linenumbers
-
-%% main text
-%%
-
-%% Use \section commands to start a section
 \section{Introduction}
 \label{sec1}
 
@@ -197,10 +119,8 @@ In summary, the main contributions of this paper are as follows:
 \end{itemize}
 
 %This paper is organized as follows. Section~2 reviews related work on LLM agents, uncertainty quantification and selective prediction. Section~3 presents the TrustStatAgent framework. Section~4 describes the datasets, baselines and evaluation metrics. Section~5 reports and discusses the experimental results. Section~6 concludes the paper and outlines directions for future work.
-%% Labels are used to cross-reference an item using \ref command.
 
 \section{Related Work}
-%% Use \subsection commands to start a subsection.
 \subsection{Large language model agents for statistical analysis}
 \label{subsec:statistical_agents}
 Large language models (LLMs) offer a new interface for data analysis through natural language. Users can describe an analytical task, and the model can identify relevant variables, organize the required steps,and invoke external tools to perform computations. In this workflow, the LLM interprets the task and plans the analysis, while statistical tools perform numerical computations and execute models. ReAct interleaves reasoning and actions so that models can adjust their task trajectories using external feedback~\citep{yao2023react}.Data Interpreter extends this approach to multistage data analysis by representing task dependencies as a graph and incorporating iterative verification and correction~\citep{hong2025data}.These studies provide a foundation for translating natural language requests into executable workflows.
@@ -222,11 +142,6 @@ Trustworthy artificial intelligence encompasses transparency, explainability, fa
 Selective prediction allows a system to abstain on some inputs when the available evidence is insufficient, while considering both prediction risk and the acceptance rate. SelectiveNet integrates prediction with a reject option and examines the trade-off between risk and coverage~\citep{geifman2019selectivenet}. For language model outputs, conformal methods have been used to construct output sets, demonstrating how statistical calibration can contribute to reliability assessment~\citep{quach2024conformal}.
 
 Building on these studies, TrustStatAgent is designed as a calibration and release workflow for heterogeneous statistical tasks. Authorized tools generate candidate results, calibration procedures tailored to the target produce prediction intervals or sets, and execution checks and task requirements determine whether each result can be released automatically.
-
-%% Use \subsubsection, \paragraph, \subparagraph commands to 
-%% start 3rd, 4th and 5th level sections.
-%% Refer following link for more details.
-%% https://en.wikibooks.org/wiki/LaTeX/Document_Structure#Sectioning_commands
 
 
 \section{Methodology}
@@ -266,7 +181,7 @@ For each predictive task, the model configuration and preprocessing procedures a
 Figure~\ref{fig:planning_execution} illustrates this
 workflow using a house-value prediction request.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{sci1.png}
     \caption{LLM task planning and statistical tool execution}
@@ -316,7 +231,7 @@ task setting.
 Figure~\ref{fig:conformal_calibration} summarizes the four
 task-specific calibration procedures described below.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{sci2.png}
     \caption{Task-specific conformal uncertainty calibration.}
@@ -537,7 +452,7 @@ to these predefined rules.
 Figure~\ref{fig:risk_gating} illustrates the checks,
 acceptance tests, and routing decisions of the release gate.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{sci3.png}
     \caption{Risk gating and selective release.}
@@ -574,7 +489,7 @@ candidates together.
 \subsection{Benchmark tasks and datasets}
 \label{sec:benchmark_tasks}
 
-Four benchmarks are selected to examine different forms of statistical output and calibrated uncertainty. StatQA evaluates structured statistical analysis, California Housing supports numerical regression, Adult supports categorical prediction, and Carbon Monitor supports temporal forecasting. Their roles in the evaluation are summarized in Table~\ref{tab:benchmark_tasks}.
+Four benchmarks are selected to examine different forms of statistical output and calibrated uncertainty. \textcolor{blue}{StatQA~\citep{zhu2024large} evaluates structured statistical analysis, California Housing~\citep{pace1997sparse} supports numerical regression, Adult~\citep{becker1996adult} supports categorical prediction, and Carbon Monitor~\citep{liu2020carbon} supports temporal forecasting.} Their roles in the evaluation are summarized in Table~\ref{tab:benchmark_tasks}.
 
 \begin{table}[H]
     \centering
@@ -627,16 +542,16 @@ Four benchmarks are selected to examine different forms of statistical output an
     \setlength{\itemsep}{6pt}
 
     \item \textbf{StatQA.}
-    StatQA is a benchmark for statistical analysis that evaluates the selection of relevant variables and applicable statistical methods. In our evaluation, the candidate answer consists of the variable and method selections returned by the agent. Correctness is determined using the benchmark's official evaluation procedure. This binary outcome also defines the target label for answer-correctness calibration.
+    \textcolor{blue}{StatQA~\citep{zhu2024large} is a benchmark for statistical analysis that evaluates the selection of relevant variables and applicable statistical methods. Following the evaluation protocol adopted by the benchmark authors, all experiments on this task are conducted on mini-StatQA, the stratified subset of 1{,}163 examples released together with the benchmark, which preserves the task-category and difficulty distribution of the full collection~\citep{zhu2024large}.} In our evaluation, the candidate answer consists of the variable and method selections returned by the agent. Correctness is determined using the benchmark's official evaluation procedure. This binary outcome also defines the target label for answer-correctness calibration.
 
     \item \textbf{California Housing.}
-    California Housing is used to evaluate numerical prediction of median house values. The statistical tool generates point predictions and preliminary lower and upper quantile estimates, which are subsequently calibrated using conformalized quantile regression. Prediction errors, interval widths, and the allowable error tolerance are reported in consistent target units.
+    \textcolor{blue}{California Housing~\citep{pace1997sparse}} is used to evaluate numerical prediction of median house values. The statistical tool generates point predictions and preliminary lower and upper quantile estimates, which are subsequently calibrated using conformalized quantile regression. Prediction errors, interval widths, and the allowable error tolerance are reported in consistent target units.
 
     \item \textbf{Adult.}
-    Adult is used for binary classification of whether annual income exceeds USD 50,000. The classifier returns a predicted class and class probabilities. These probabilities are converted into a conformal prediction set, allowing the release gate to distinguish a singleton consistent with the predicted class from ambiguous or incompatible outputs.
+    \textcolor{blue}{Adult~\citep{becker1996adult}} is used for binary classification of whether annual income exceeds USD 50,000. The classifier returns a predicted class and class probabilities. These probabilities are converted into a conformal prediction set, allowing the release gate to distinguish a singleton consistent with the predicted class from ambiguous or incompatible outputs.
 
     \item \textbf{Carbon Monitor.}
-    Carbon Monitor provides daily estimates of carbon dioxide emissions and is used here to construct a temporal forecasting task. Forecasts are evaluated at a fixed horizon, and uncertainty is calibrated using previously observed forecast errors.
+    \textcolor{blue}{Carbon Monitor~\citep{liu2020carbon}} provides daily estimates of carbon dioxide emissions and is used here to construct a temporal forecasting task. Forecasts are evaluated at a fixed horizon, and uncertainty is calibrated using previously observed forecast errors.
 
 \end{enumerate}
 
@@ -704,12 +619,12 @@ Actual error is treated as the positive class, and referral for review as a posi
     \centering
     \caption{Confusion matrix for release decisions}
     \label{tab:exp_release_confusion}
-    \small
+    \footnotesize
     \renewcommand{\arraystretch}{1.2}
 
     \begin{tabularx}{\linewidth}{
         @{}
-        >{\raggedright\arraybackslash}p{0.28\linewidth}
+        >{\raggedright\arraybackslash}p{0.26\linewidth}
         >{\raggedright\arraybackslash}X
         >{\raggedright\arraybackslash}X
         @{}
@@ -932,7 +847,7 @@ Table~\ref{tab:base_performance} reports the base metrics.
 Because the three modules operate after a candidate has been produced, these metrics do not depend on the release decision, and the table compares task competence rather than release behaviour.
 
 TrustStatAgent attains an official accuracy of 72.84\% on StatQA, an accuracy of 84.67\% on Adult, a mean absolute error of 0.3143 on California Housing, and 306.10 on Carbon Monitor.
-The first of these is 7.33 percentage points above the same pipeline without explicit planning (Table~\ref{tab:ablation_results}), and it is above the 64.83\% reported by \citet{zhu2024large} for the strongest model on this benchmark.
+The first of these is 7.33 percentage points above the same pipeline without explicit planning (Table~\ref{tab:ablation_results}), and it is above the 64.83\% reported by \citet{zhu2024large} for the strongest model \textcolor{blue}{evaluated on the same mini-StatQA subset}.
 The latter comparison is not strict.
 The present setting supplies a data schema and restricts the analysis to a small fixed set of statistical tools, as illustrated by the workflow of Figure~\ref{fig:planning_execution}, which removes part of the method-selection burden that the benchmark identifies as the dominant error source.
 It supports the claim that a tool-restricted agent operates in the regime the benchmark targets; it does not show that the agent surpasses unaided reasoning on the benchmark as originally posed.
@@ -992,17 +907,17 @@ The distinction between the width-based condition of Figure~\ref{fig:conformal_c
 
 \begin{table}[t]
 \centering
-\footnotesize
+\scriptsize
 \caption{Calibration quality and discrimination of the release decision for TrustStatAgent. Coverage, Eq.~\eqref{eq:exp_coverage}, is computed over all candidates with interpretable calibrated outputs, whereas recall, specificity, and balanced accuracy, Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy}, are computed over the confusion matrix of Table~\ref{tab:exp_release_confusion}. Every row uses the candidate population of the pipeline that produced it, namely the without-gate row of Table~\ref{tab:ablation_results}: 27.16\% on StatQA, 15.33\% on Adult, 4.38\% on California Housing and 3.47\% on Carbon Monitor. Using the ReAct population instead would change the StatQA and California Housing rows only, by at most one percentage point. The nominal level is selected per task on the validation split. Coverage on StatQA is not available in the exported results and is marked accordingly. Publishing every candidate attains recall 0, specificity 1, and BA 0.5 on every benchmark. The last column gives the number of correct results withheld per intercepted error.}
 \label{tab:calibration_discrimination}
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}lccccc@{}}
 \toprule
-\textbf{Benchmark} & \textbf{Coverage (\%)} & \textbf{Recall (\%)} & \textbf{Specificity (\%)} & \textbf{BA} & \textbf{Referrals per intercepted error}\\
+\textbf{Benchmark} & \textbf{Coverage (\%)} & \textbf{Recall (\%)} & \textbf{Specificity (\%)} & \textbf{BA} & \textbf{Referrals per error}\\
 \midrule
 StatQA & --- & 96.83 & 62.13 & 0.795 & 1.05\\
 Adult & 98.53 & 90.39 & 62.38 & 0.764 & 2.30\\
-California Housing & 84.23 & 72.93 & 65.32 & 0.691 & 10.37\\
+Calif. Housing & 84.23 & 72.93 & 65.32 & 0.691 & 10.37\\
 Carbon Monitor & 92.08 & 28.57 & 77.95 & 0.533 & 21.50\\
 \bottomrule
 \end{tabularx}
@@ -1053,10 +968,10 @@ The rule publishes the subset whose calibrated output satisfies the acceptance r
 
 \begin{table}[t]
 \centering
-\footnotesize
+\scriptsize
 \caption{Release behaviour of the three policies on the test partition. Publishing every candidate reproduces the candidate error rate of Table~\ref{tab:base_performance}. Conventional gating applies a threshold tuned on validation records to uncalibrated intervals or confidence scores.}
 \label{tab:release_behaviour}
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}lcccccc@{}}
 \toprule
 & \multicolumn{2}{c}{\textbf{Publish every candidate}} & \multicolumn{2}{c}{\textbf{Conventional gating}} & \multicolumn{2}{c}{\textbf{TrustStatAgent}}\\
@@ -1065,7 +980,7 @@ The rule publishes the subset whose calibrated output satisfies the acceptance r
 \midrule
 StatQA & 100.00 & 28.23 & 43.97 & 1.96 & 46.12 & 1.87\\
 Adult & 100.00 & 15.33 & 57.18 & 3.22 & 54.29 & 2.72\\
-California Housing & 100.00 & 4.51 & 67.22 & 2.02 & 63.64 & 1.87\\
+Calif. Housing & 100.00 & 4.51 & 67.22 & 2.02 & 63.64 & 1.87\\
 Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \bottomrule
 \end{tabularx}
@@ -1077,7 +992,7 @@ Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \providecolor{cErr}{RGB}{163,45,45}%
 \providecolor{cOk}{RGB}{192,221,151}%
 \providecolor{cHold}{RGB}{186,117,23}%
-\begin{tikzpicture}[x=0.095cm,y=1cm]
+\begin{tikzpicture}[x=0.085cm,y=1cm]
 
 \fill[cErr] (0,0) rectangle (27.155,0.30);
 \fill[cOk] (27.155,0) rectangle (100,0.30);
@@ -1185,18 +1100,18 @@ The behaviour of conventional gating on Carbon Monitor agrees with this reading:
 
 \begin{table}[t]
 \centering
-\footnotesize
+\scriptsize
 \caption{Ablation results. The variant without the gate releases every candidate that holds a valid calibrated output, so its released error rate reproduces the candidate error rate of Section~\ref{sec:results_base}.}
 \label{tab:ablation_results}
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}llcccc@{}}
 \toprule
 \textbf{Variant} & \textbf{Metric} & \textbf{StatQA} & \textbf{Adult} & \textbf{Calif. Housing} & \textbf{Carbon Monitor}\\
 \midrule
-Publish every candidate (ReAct) & Released error rate (\%) & 28.23 & 15.33 & 4.51 & 3.47\\
-w/o Risk Gate & Released error rate (\%) & 27.16 & 15.33 & 4.38 & 3.47\\
-w/o Conformal Calibration & Released error rate (\%) & 5.93 & 15.33 & 1.88 & 3.47\\
-Full Model & Released error rate (\%) & 1.87 & 2.72 & 1.87 & 3.18\\
+Publish all (ReAct) & Released err. (\%) & 28.23 & 15.33 & 4.51 & 3.47\\
+w/o Risk Gate & Released err. (\%) & 27.16 & 15.33 & 4.38 & 3.47\\
+w/o Conformal Calib. & Released err. (\%) & 5.93 & 15.33 & 1.88 & 3.47\\
+Full Model & Released err. (\%) & 1.87 & 2.72 & 1.87 & 3.18\\
 \midrule
 w/o Explicit Planning & Accuracy (\%) & 65.52 & --- & --- & ---\\
 Full Model & Accuracy (\%) & 72.84 & --- & --- & ---\\
@@ -1363,260 +1278,7 @@ Second, the operating point should be derived from a stated cost ratio rather th
 Third, the workflow should be tested on tasks whose correctness depends on several modelling decisions at once, such as model diagnostics and multiple-testing corrections, where the acceptance region is harder to specify than an error band but where the same separation between generation and release applies.
 
 
-%% The Appendices part is started with the command \appendix;
-%% appendix sections are then done as normal sections
-\appendix
-\section{Example Appendix Section}
-\label{app1}
-
-
-
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
 
 \end{document}
-
-
-
-
-
-
-\bibitem[Angelopoulos and Bates(2021)]{angelopoulos2021gentle}
-Anastasios N. Angelopoulos, Stephen Bates,
-\textit{A gentle introduction to conformal prediction and distribution-free uncertainty quantification},
-arXiv preprint arXiv:2107.07511,
-2021. https://doi.org/10.48550/arXiv.2107.07511
-
-\bibitem[Angelopoulos et al.(2024)]{angelopoulos2024conformal}
-Anastasios N. Angelopoulos, Stephen Bates, Adam Fisch, Lihua Lei, Tal Schuster,
-\textit{Conformal risk control},
-in: International Conference on Learning Representations (ICLR),
-2024. https://doi.org/10.48550/arXiv.2208.02814
-
-\bibitem[Becker and Kohavi(1996)]{becker1996adult}
-Barry Becker, Ronny Kohavi,
-\textit{Adult [Dataset]},
-UCI Machine Learning Repository,
-1996. https://doi.org/10.24432/C5XW20
-
-\bibitem[Campos et al.(2024)]{campos2024conformal}
-Margarida Campos, Ant{\'o}nio Farinhas, Chrysoula Zerva, M{\'a}rio A. T. Figueiredo, Andr{\'e} F. T. Martins,
-\textit{Conformal prediction for natural language processing: A survey},
-Transactions of the Association for Computational Linguistics, 12, 1497--1516,
-2024. https://doi.org/10.1162/tacl\_a\_00715
-
-\bibitem[Cherian et al.(2024)]{cherian2024large}
-John J. Cherian, Isaac Gibbs, Emmanuel J. Cand{\`e}s,
-\textit{Large language model validity via enhanced conformal prediction methods},
-in: Advances in Neural Information Processing Systems (NeurIPS), Vol. 37,
-2024. https://doi.org/10.48550/arXiv.2406.09714
-
-\bibitem[Geifman and El-Yaniv(2017)]{geifman2017selective}
-Yonatan Geifman, Ran El-Yaniv,
-\textit{Selective classification for deep neural networks},
-in: Advances in Neural Information Processing Systems (NeurIPS), Vol. 30, 4878--4887,
-2017. https://doi.org/10.48550/arXiv.1705.08500
-
-\bibitem[Guo et al.(2017)]{guo2017calibration}
-Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger,
-\textit{On calibration of modern neural networks},
-in: International Conference on Machine Learning (ICML), 1321--1330,
-2017. https://doi.org/10.48550/arXiv.1706.04599
-
-\bibitem[He et al.(2026)]{he2026enhancing}
-Guoxiu He, Meicong Zhang, Tiancheng Su, Li Ma, Xiaomin Zhu,
-\textit{Enhancing belief consistency of large language model agents in decision-making process based on attribution theory},
-Expert Systems with Applications, 297, 129273,
-2026. https://doi.org/10.1016/j.eswa.2025.129273
-
-\bibitem[Ji et al.(2023)]{ji2023survey}
-Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Yejin Bang, Andrea Madotto, Pascale Fung,
-\textit{Survey of hallucination in natural language generation},
-ACM Computing Surveys, 55(12), 1--38,
-2023. https://doi.org/10.1145/3571730
-
-\bibitem[Kadavath et al.(2022)]{kadavath2022language}
-Saurav Kadavath, Tom Conerly, Amanda Askell, Tom Henighan, Dawn Drain, Ethan Perez, et al.,
-\textit{Language models (mostly) know what they know},
-arXiv preprint arXiv:2207.05221,
-2022. https://doi.org/10.48550/arXiv.2207.05221
-
-\bibitem[Kojima et al.(2022)]{kojima2022large}
-Takeshi Kojima, Shixiang Shane Gu, Machel Reid, Yutaka Matsuo, Yusuke Iwasawa,
-\textit{Large language models are zero-shot reasoners},
-in: Advances in Neural Information Processing Systems (NeurIPS), Vol. 35, 22199--22213,
-2022. https://doi.org/10.48550/arXiv.2205.11916
-
-\bibitem[Lei et al.(2018)]{lei2018distribution}
-Jing Lei, Max G'Sell, Alessandro Rinaldo, Ryan J. Tibshirani, Larry Wasserman,
-\textit{Distribution-free predictive inference for regression},
-Journal of the American Statistical Association, 113(523), 1094--1111,
-2018. https://doi.org/10.1080/01621459.2017.1307116
-
-\bibitem[Liu et al.(2020)]{liu2020carbon}
-Zhu Liu, Philippe Ciais, Zhu Deng, Steven J. Davis, Bo Zheng, et al.,
-\textit{Carbon Monitor, a near-real-time daily dataset of global CO$_2$ emission from fossil fuel and cement production},
-Scientific Data, 7, 392,
-2020. https://doi.org/10.1038/s41597-020-00708-7
-
-\bibitem[Pace and Barry(1997)]{pace1997sparse}
-R. Kelley Pace, Ronald Barry,
-\textit{Sparse spatial autoregressions},
-Statistics \& Probability Letters, 33(3), 291--297,
-1997. https://doi.org/10.1016/S0167-7152(96)00140-X
-
-\bibitem[Schick et al.(2023)]{schick2023toolformer}
-Timo Schick, Jane Dwivedi-Yu, Roberto Dess{\`i}, Roberta Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom,
-\textit{Toolformer: Language models can teach themselves to use tools},
-in: Advances in Neural Information Processing Systems (NeurIPS), Vol. 36, 68539--68551,
-2023. https://doi.org/10.48550/arXiv.2302.04761
-
-\bibitem[Shi et al.(2025)]{shi2025mitigating}
-J. Shi, J. Zhao, X. Wu, R. Xu, Y.-H. Jiang, L. He,
-\textit{Mitigating reasoning hallucination through multi-agent collaborative filtering},
-Expert Systems with Applications, 263, 125723,
-2025. https://doi.org/10.1016/j.eswa.2024.125723
-
-\bibitem[Sun et al.(2026)]{sun2026survey}
-Maojun Sun, Ruijian Han, Binyan Jiang, Houduo Qi, Defeng Sun, Yancheng Yuan, Jian Huang,
-\textit{A survey on large language model-based agents for statistics and data science},
-The American Statistician, 80(3), 331--344,
-2026. https://doi.org/10.1080/00031305.2025.2561140
-
-\bibitem[Wang et al.(2023)]{wang2023self}
-Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang, Aakanksha Chowdhery, Denny Zhou,
-\textit{Self-consistency improves chain of thought reasoning in language models},
-in: International Conference on Learning Representations (ICLR),
-2023. https://doi.org/10.48550/arXiv.2203.11171
-
-\bibitem[Wang et al.(2024)]{wang2024conu}
-Zhiyuan Wang, Jinhao Duan, Lu Cheng, Yue Zhang, Qingni Wang, Xiaoshuang Shi, Kaidi Xu, Heng Tao Shen, Xiaofeng Zhu,
-\textit{ConU: Conformal uncertainty in large language models with correctness coverage guarantees},
-in: Findings of the Association for Computational Linguistics: EMNLP 2024, 6886--6898,
-2024. https://doi.org/10.18653/v1/2024.findings-emnlp.404
-
-\bibitem[Wei et al.(2022)]{wei2022chain}
-Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, Denny Zhou,
-\textit{Chain-of-thought prompting elicits reasoning in large language models},
-in: Advances in Neural Information Processing Systems (NeurIPS), Vol. 35, 24824--24837,
-2022. https://doi.org/10.48550/arXiv.2201.11903
-
-\bibitem[Yao et al.(2023)]{yao2023react}
-Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao,
-\textit{ReAct: Synergizing reasoning and acting in language models},
-in: International Conference on Learning Representations (ICLR),
-2023. https://doi.org/10.48550/arXiv.2210.03629
-
-\bibitem[Zhu et al.(2024)]{zhu2024large}
-Yizhang Zhu, Shiyu Du, Boyan Li, Yuyu Luo, Nan Tang,
-\textit{Are large language models good statisticians?},
-in: Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, Vol. 37, 62697--62731,
-2024. https://doi.org/10.48550/arXiv.2406.07815
-
-\bibitem[Angelopoulos and Bates(2023)]{angelopoulos2023}
-Anastasios N. Angelopoulos, Stephen Bates,
-\textit{Conformal prediction: A gentle introduction},
-Foundations and Trends in Machine Learning 16(4),
-2023, pp. 494--591. https://doi.org/10.1561/2200000101
-
-\bibitem[Yao et al.(2023)]{yao2023react}
-Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao,
-\textit{ReAct: Synergizing reasoning and acting in language models},
-in: International Conference on Learning Representations (ICLR),
-2023. https://doi.org/10.48550/arXiv.2210.03629
-
-\bibitem[Hong et al.(2025)]{hong2025data}
-Sirui Hong, Yizhang Lin, Bang Liu, Bangbang Liu,
-Binhao Wu, Ceyao Zhang, Danyang Li, Jiaqi Chen,
-Jiayi Zhang, Jinlin Wang, Li Zhang, Lingyao Zhang,
-Min Yang, Mingchen Zhuge, Taicheng Guo, Tuo Zhou,
-Wei Tao, Robert Tang, Xiangtao Lu, Xiawu Zheng,
-Xinbing Liang, Yaying Fei, Yuheng Cheng, Yongxin Ni,
-Zhibin Gou, Zongze Xu, Yuyu Luo, Chenglin Wu,
-\textit{Data Interpreter: An LLM Agent for Data Science},
-in: Findings of the Association for Computational Linguistics:
-ACL 2025, pp. 19796--19821, 2025.
-https://doi.org/10.18653/v1/2025.findings-acl.1016
-
-\bibitem[Ghahramani(2015)]{ghahramani2015probabilistic}
-Zoubin Ghahramani,
-\textit{Probabilistic machine learning and artificial intelligence},
-Nature 521 (2015), 452--459.
-https://doi.org/10.1038/nature14541
-
-\bibitem[Romano et al.(2019)]{romano2019cqr}
-Yaniv Romano, Evan Patterson, Emmanuel J. Cand{\`e}s,
-\textit{Conformalized quantile regression},
-in: Advances in Neural Information Processing Systems,
-vol. 32, 2019.
-https://proceedings.neurips.cc/paper/2019/hash/5103c3584b063c431bd1268e9b5e76fb-Abstract.html
-
-\bibitem[Lei et al.(2018)]{lei2018distribution}
-Jing Lei, Max G'Sell, Alessandro Rinaldo, Ryan J. Tibshirani,
-Larry Wasserman,
-Distribution-free predictive inference for regression,
-\textit{Journal of the American Statistical Association},
-113(523), 2018, pp. 1094--1111.
-https://doi.org/10.1080/01621459.2017.1307116
-
-\bibitem[Botvinik-Nezer et al.(2020)]{botvinik2020variability}
-Rotem Botvinik-Nezer et al.,
-Variability in the analysis of a single neuroimaging dataset
-by many teams,
-\textit{Nature},
-582, 2020, pp. 84--88.
-https://doi.org/10.1038/s41586-020-2314-9
-
-\bibitem[El-Yaniv and Wiener(2010)]{elyaniv2010foundations}
-Ran El-Yaniv, Yair Wiener,
-On the foundations of noise-free selective classification,
-\textit{Journal of Machine Learning Research},
-11, 2010, pp. 1605--1641.
-https://jmlr.org/papers/v11/el-yaniv10a.html
-
-\bibitem[Li et al.(2023)]{li2023trustworthy}
-Bo Li, Peng Qi, Bo Liu, Shuai Di, Jingen Liu,
-Jiquan Pei, Jinfeng Yi, Bowen Zhou,
-\textit{Trustworthy AI: From principles to practices},
-ACM Computing Surveys 55(9) (2023),
-Article 177, 1--46.
-https://doi.org/10.1145/3555803
-
-\bibitem[Heo et al.(2025)]{heo2025halucheck}
-S. Heo, S. Son, H. Park,
-\textit{HaluCheck: Explainable and verifiable automation
-for detecting hallucinations in LLM responses},
-Expert Systems with Applications 272 (2025), 126712.
-https://doi.org/10.1016/j.eswa.2025.126712
-
-\bibitem[Geifman and El-Yaniv(2019)]{geifman2019selectivenet}
-Yonatan Geifman, Ran El-Yaniv,
-\textit{SelectiveNet: A deep neural network
-with an integrated reject option},
-in: Proceedings of the 36th International Conference
-on Machine Learning,
-Proceedings of Machine Learning Research,
-vol. 97, 2019, pp. 2151--2159.
-https://proceedings.mlr.press/v97/geifman19a.html
-
-\bibitem[Quach et al.(2024)]{quach2024conformal}
-Victor Quach, Adam Fisch, Tal Schuster, Adam Yala,
-Jae Ho Sohn, Tommi S. Jaakkola, Regina Barzilay,
-\textit{Conformal language modeling},
-in: International Conference on Learning Representations
-(ICLR), 2024.
-https://arxiv.org/abs/2306.10193
-
-\bibitem[Gibbs and Cand{\`e}s(2021)]{gibbs2021adaptive}
-Isaac Gibbs, Emmanuel Cand{\`e}s,
-\textit{Adaptive conformal inference under distribution shift},
-in: Advances in Neural Information Processing Systems,
-vol. 34, 2021, pp. 1660--1672.
-https://arxiv.org/abs/2106.00170
-
-\end{thebibliography}
-\end{document}
-
-
-
-
