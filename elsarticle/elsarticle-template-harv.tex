@@ -789,7 +789,7 @@ The ablation variants and their evaluation focus are summarized in Table~\ref{ta
 \textcolor{blue}{All language-model calls use gpt-6.1-sol through an OpenAI-compatible API, with deterministic decoding (temperature 0.0) and a completion budget of 1200 tokens. On StatQA each candidate is produced by one generation, so the main comparison of three candidate pipelines over the 1{,}163 mini-StatQA items requires 3{,}489 generations, and the verbalized-confidence baseline adds 1{,}163 self-assessment calls; the correctness scorer used for calibration is a TF--IDF logistic regression and requires no language-model calls. On the three predictive benchmarks the language model is used only in a planning preflight, one call per dataset, after which all 19{,}390 test predictions are produced by fixed statistical pipelines (gradient boosting for California Housing, logistic regression for Adult, and a seasonal-naive forecaster for Carbon Monitor). The language model therefore accounts for a small and precisely countable fraction of the computation, and neither calibration nor gating involves it.}
 
 \textcolor{blue}{This separation also bounds the dependence of the conclusions on the specific model. The coverage guarantee of Section~\ref{sec:uncertainty_calibration} is a property of the calibration procedure and holds for any candidate generator, and the gate of Section~\ref{sec:risk_gating} is a deterministic program whose inputs are execution records and calibrated outputs. Substituting a different instruction-following model changes the quality of the candidate pool, hence the operating point at which the gate settles, but it changes neither the validity of the calibration nor the auditability of the release decision. The prompts used in every language-model interaction are reproduced in \ref{app:prompts}, and the per-benchmark call counts in \ref{app:budget}.}
-\section{Results and discussion}
+\section{\textcolor{blue}{Results}}
 \label{sec:results}
 
 \subsection{\textcolor{blue}{Experimental settings}}
@@ -1130,7 +1130,7 @@ Full Model & Accuracy (\%) & \textcolor{blue}{73.00$\pm$1.72} & --- & --- & ---\
 \end{tabularx}
 \end{table}
 
-\subsection{Discussion}
+\section{\textcolor{blue}{Discussion}}
 \label{sec:results_discussion}
 
 The four benchmarks divide the work of the gate in a consistent way, and the division follows two properties of the task rather than any implementation detail.
@@ -1245,7 +1245,7 @@ The failure of conventional gating on Carbon Monitor is not a failure of thresho
 \label{fig:frontier}
 \end{figure}
 
-\subsection{Limitations}
+\section{\textcolor{blue}{Limitations}}
 \label{sec:results_limitations}
 
 Two assumptions carry most of the theoretical weight, and both are weaker than the experiments may suggest.
