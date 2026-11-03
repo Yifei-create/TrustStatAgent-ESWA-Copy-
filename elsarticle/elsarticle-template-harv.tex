@@ -26,7 +26,7 @@
 %% \usepackage{lineno}
 \usepackage[colorlinks=true,allcolors=blue]{hyperref}
 
-\journal{\textcolor{blue}{Expert Systems with Applications}}
+\journal{Expert Systems with Applications}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -37,7 +37,7 @@
 
 \begin{frontmatter}
 
-\title{\textcolor{blue}{TrustStatAgent: Conformally calibrated release decisions for large language model statistical agents}}
+\title{TrustStatAgent: Conformally calibrated release decisions for large language model statistical agents}
 
 \author{} %% Author name
 
@@ -51,28 +51,27 @@
 
 %% Abstract
 \begin{abstract}
-Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent, \textcolor{blue}{in which an LLM} plans the analysis and routes every computation through statistical tools, conformal calibration turns each candidate into an interval or label set with finite-sample coverage, and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is \textcolor{blue}{not free, since} between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review\textcolor{blue}{. The} release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
+Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent, in which an LLM plans the analysis and routes every computation through statistical tools, conformal calibration turns each candidate into an interval or label set with finite-sample coverage, and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%. The gain is not free, since between 22.28\% and 48.34\% of results are referred for review. The release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
 \end{abstract}
 
 %%Graphical abstract
 \begin{graphicalabstract}
-\textcolor{blue}{\includegraphics[width=\linewidth]{figures/download.png}}
+\includegraphics[width=\linewidth]{figures/download.png}
 \end{graphicalabstract}
 
 %%Research highlights
 \begin{highlights}
-\item \textcolor{blue}{An LLM statistical agent that decides not only what to compute but what to publish}
-\item \textcolor{blue}{Conformal calibration gives every result a finite-sample coverage guarantee}
-\item \textcolor{blue}{A deterministic gate makes every release decision auditable, outside the LLM}
-\item \textcolor{blue}{Released error falls from 27\% to 3.8\% on StatQA while releasing 51.7\% of results}
-\item \textcolor{blue}{On carbon forecasting, validation-tuned gating is worse than publishing everything}
+\item An LLM statistical agent that decides not only what to compute but what to publish
+\item Conformal calibration gives every result a finite-sample coverage guarantee
+\item A deterministic gate makes every release decision auditable, outside the LLM
+\item Released error falls from 27\% to 3.8\% on StatQA while releasing 51.7\% of results
+\item On carbon forecasting, validation-tuned gating is worse than publishing everything
 \end{highlights}
 
 %% Keywords
 \begin{keyword}
-{\color{blue}
+
 Large language model agents \sep Conformal prediction \sep Risk gating
-}
 \end{keyword}
 
 \end{frontmatter}
@@ -82,7 +81,7 @@ Large language model agents \sep Conformal prediction \sep Risk gating
 
 
 
-Large language models (LLMs) are increasingly deployed as the reasoning core of expert systems. This shift rests on two capabilities. The first is reasoning\textcolor{blue}{. C}hain-of-thought prompting decomposes a difficult problem into intermediate steps and markedly improves arithmetic and symbolic inference~\citep{wei2022chain}, a behaviour that can be triggered without demonstrations~\citep{kojima2022large} and stabilised by sampling and voting~\citep{wang2023self}. The second is acting\textcolor{blue}{. R}eAct interleaves reasoning traces with calls to external tools~\citep{yao2023react}, and Toolformer shows that the decision of when to invoke an interface can be learned~\citep{schick2023toolformer}.
+Large language models (LLMs) are increasingly deployed as the reasoning core of expert systems. This shift rests on two capabilities. The first is reasoning. Chain-of-thought prompting decomposes a difficult problem into intermediate steps and markedly improves arithmetic and symbolic inference~\citep{wei2022chain}, a behaviour that can be triggered without demonstrations~\citep{kojima2022large} and stabilised by sampling and voting~\citep{wang2023self}. The second is acting. ReAct interleaves reasoning traces with calls to external tools~\citep{yao2023react}, and Toolformer shows that the decision of when to invoke an interface can be learned~\citep{schick2023toolformer}.
 
 Statistical analysis is among the domains in which this capability matters most, because the work involved, such as fitting models, selecting estimators and reporting intervals, is repetitive and tool-heavy. Interest in delegating such work to LLM-based data agents has therefore grown rapidly~\citep{sun2026survey}. Systematic evaluation nevertheless indicates that the capability gap remains wide. On StatQA, a benchmark of 11{,}623 statistical-analysis items, the strongest model attains only 64.83\% accuracy, and its errors are dominated by method applicability rather than computation~\citep{zhu2024large}. The bottleneck is therefore not arithmetic, which can be delegated to deterministic tools, but the judgement surrounding it.
 
@@ -466,7 +465,7 @@ candidates together.
 \subsection{Benchmark tasks and datasets}
 \label{sec:benchmark_tasks}
 
-Four benchmarks are selected to examine different forms of statistical output and calibrated uncertainty. \textcolor{blue}{StatQA~\citep{zhu2024large} evaluates structured statistical analysis, California Housing~\citep{pace1997sparse} supports numerical regression, Adult~\citep{becker1996adult} supports categorical prediction, and Carbon Monitor~\citep{liu2020carbon} supports temporal forecasting.} Their roles in the evaluation are summarized in Table~\ref{tab:benchmark_tasks}.
+Four benchmarks are selected to examine different forms of statistical output and calibrated uncertainty. StatQA~\citep{zhu2024large} evaluates structured statistical analysis, California Housing~\citep{pace1997sparse} supports numerical regression, Adult~\citep{becker1996adult} supports categorical prediction, and Carbon Monitor~\citep{liu2020carbon} supports temporal forecasting. Their roles in the evaluation are summarized in Table~\ref{tab:benchmark_tasks}.
 
 \begin{table}[H]
     \centering
@@ -520,16 +519,16 @@ Four benchmarks are selected to examine different forms of statistical output an
     \setlength{\itemsep}{6pt}
 
     \item \textbf{StatQA.}
-    \textcolor{blue}{StatQA~\citep{zhu2024large} is a benchmark for statistical analysis that evaluates the selection of relevant variables and applicable statistical methods. Following the evaluation protocol adopted by the benchmark authors, all experiments on this task are conducted on mini-StatQA, the stratified subset of 1{,}163 examples released together with the benchmark, which preserves the task-category and difficulty distribution of the full collection~\citep{zhu2024large}.} In our evaluation, the candidate answer consists of the variable and method selections returned by the agent. Correctness is determined using the benchmark's official evaluation procedure. This binary outcome also defines the target label for answer-correctness calibration.
+    StatQA~\citep{zhu2024large} is a benchmark for statistical analysis that evaluates the selection of relevant variables and applicable statistical methods. Following the evaluation protocol adopted by the benchmark authors, all experiments on this task are conducted on mini-StatQA, the stratified subset of 1{,}163 examples released together with the benchmark, which preserves the task-category and difficulty distribution of the full collection~\citep{zhu2024large}. In our evaluation, the candidate answer consists of the variable and method selections returned by the agent. Correctness is determined using the benchmark's official evaluation procedure. This binary outcome also defines the target label for answer-correctness calibration.
 
     \item \textbf{California Housing.}
-    \textcolor{blue}{California Housing~\citep{pace1997sparse}} is used to evaluate numerical prediction of median house values. The statistical tool generates point predictions and preliminary lower and upper quantile estimates, which are subsequently calibrated using conformalized quantile regression. Prediction errors, interval widths, and the allowable error tolerance are reported in consistent target units.
+    California Housing~\citep{pace1997sparse} is used to evaluate numerical prediction of median house values. The statistical tool generates point predictions and preliminary lower and upper quantile estimates, which are subsequently calibrated using conformalized quantile regression. Prediction errors, interval widths, and the allowable error tolerance are reported in consistent target units.
 
     \item \textbf{Adult.}
-    \textcolor{blue}{Adult~\citep{becker1996adult}} is used for binary classification of whether annual income exceeds USD 50,000. The classifier returns a predicted class and class probabilities. These probabilities are converted into a conformal prediction set, allowing the release gate to distinguish a singleton consistent with the predicted class from ambiguous or incompatible outputs.
+    Adult~\citep{becker1996adult} is used for binary classification of whether annual income exceeds USD 50,000. The classifier returns a predicted class and class probabilities. These probabilities are converted into a conformal prediction set, allowing the release gate to distinguish a singleton consistent with the predicted class from ambiguous or incompatible outputs.
 
     \item \textbf{Carbon Monitor.}
-    \textcolor{blue}{Carbon Monitor~\citep{liu2020carbon}} provides daily estimates of carbon dioxide emissions and is used here to construct a temporal forecasting task. Forecasts are evaluated at a fixed horizon, and uncertainty is calibrated using previously observed forecast errors.
+    Carbon Monitor~\citep{liu2020carbon} provides daily estimates of carbon dioxide emissions and is used here to construct a temporal forecasting task. Forecasts are evaluated at a fixed horizon, and uncertainty is calibrated using previously observed forecast errors.
 
 \end{enumerate}
 
@@ -678,7 +677,7 @@ When both correct and erroneous candidates are present, releasing every candidat
 \subsection{Comparative methods}
 \label{sec:comparative_methods}
 
-\textcolor{blue}{The comparative evaluation includes a tool-using baseline and two release-control baselines, one built on a validation-tuned confidence threshold and one on the model's verbally reported confidence~\citep{kadavath2022language}. The verbalized baseline presupposes a generated answer to self-assess and is therefore evaluated on StatQA, the benchmark whose candidates are produced by the language model. Together with the ablation variants of Section~\ref{sec:ablation_studies}, this design separates the contribution of calibrated release decisions from that of the underlying candidate pipeline and from that of the confidence signal being gated on.} The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
+The comparative evaluation includes a tool-using baseline and two release-control baselines, one built on a validation-tuned confidence threshold and one on the model's verbally reported confidence~\citep{kadavath2022language}. The verbalized baseline presupposes a generated answer to self-assess and is therefore evaluated on StatQA, the benchmark whose candidates are produced by the language model. Together with the ablation variants of Section~\ref{sec:ablation_studies}, this design separates the contribution of calibrated release decisions from that of the underlying candidate pipeline and from that of the confidence signal being gated on. The methods and their comparison purposes are summarized in Table~\ref{tab:comparative_methods}.
 
 \begin{table}[H]
     \centering
@@ -710,12 +709,12 @@ When both correct and erroneous candidates are present, releasing every candidat
           or confidence scores
         & Compare conventional and conformal release control \\
 
-        \textcolor{blue}{Verbalized Confidence Gating}
-        & \textcolor{blue}{Tool use with a gate applied to the model's
+        Verbalized Confidence Gating
+        & Tool use with a gate applied to the model's
           self-reported probability of correctness, thresholded on
-          validation records}
-        & \textcolor{blue}{Compare calibrated and self-reported
-          confidence as gating signals} \\
+          validation records
+        & Compare calibrated and self-reported
+          confidence as gating signals \\
 
         TrustStatAgent
         & Explicit planning, statistical tools, conformal
@@ -783,16 +782,16 @@ The ablation variants and their evaluation focus are summarized in Table~\ref{ta
     \end{tabularx}
 \end{table}
 
-{\color{blue}\subsection{Language model configuration and computational budget}
-\label{sec:llm_configuration}}
+\subsection{Language model configuration and computational budget}
+\label{sec:llm_configuration}
 
-\textcolor{blue}{All language-model calls use gpt-6.1-sol through an OpenAI-compatible API, with deterministic decoding (temperature 0.0) and a completion budget of 1200 tokens. On StatQA each candidate is produced by one generation, so the main comparison of three candidate pipelines over the 1{,}163 mini-StatQA items requires 3{,}489 generations, and the verbalized-confidence baseline adds 1{,}163 self-assessment calls; the correctness scorer used for calibration is a TF--IDF logistic regression and requires no language-model calls. On the three predictive benchmarks the language model is used only in a planning preflight, one call per dataset, after which all 19{,}390 test predictions are produced by fixed statistical pipelines (gradient boosting for California Housing, logistic regression for Adult, and a seasonal-naive forecaster for Carbon Monitor). The language model therefore accounts for a small and precisely countable fraction of the computation, and neither calibration nor gating involves it.}
+All language-model calls use gpt-6.1-sol through an OpenAI-compatible API, with deterministic decoding (temperature 0.0) and a completion budget of 1200 tokens. On StatQA each candidate is produced by one generation, so the main comparison of three candidate pipelines over the 1{,}163 mini-StatQA items requires 3{,}489 generations, and the verbalized-confidence baseline adds 1{,}163 self-assessment calls; the correctness scorer used for calibration is a TF--IDF logistic regression and requires no language-model calls. On the three predictive benchmarks the language model is used only in a planning preflight, one call per dataset, after which all 19{,}390 test predictions are produced by fixed statistical pipelines (gradient boosting for California Housing, logistic regression for Adult, and a seasonal-naive forecaster for Carbon Monitor). The language model therefore accounts for a small and precisely countable fraction of the computation, and neither calibration nor gating involves it.
 
-\textcolor{blue}{This separation also bounds the dependence of the conclusions on the specific model. The coverage guarantee of Section~\ref{sec:uncertainty_calibration} is a property of the calibration procedure and holds for any candidate generator, and the gate of Section~\ref{sec:risk_gating} is a deterministic program whose inputs are execution records and calibrated outputs. Substituting a different instruction-following model changes the quality of the candidate pool, hence the operating point at which the gate settles, but it changes neither the validity of the calibration nor the auditability of the release decision. The prompts used in every language-model interaction are reproduced in \ref{app:prompts}, and the per-benchmark call counts in \ref{app:budget}.}
-\section{\textcolor{blue}{Results}}
+This separation also bounds the dependence of the conclusions on the specific model. The coverage guarantee of Section~\ref{sec:uncertainty_calibration} is a property of the calibration procedure and holds for any candidate generator, and the gate of Section~\ref{sec:risk_gating} is a deterministic program whose inputs are execution records and calibrated outputs. Substituting a different instruction-following model changes the quality of the candidate pool, hence the operating point at which the gate settles, but it changes neither the validity of the calibration nor the auditability of the release decision. The prompts used in every language-model interaction are reproduced in \ref{app:prompts}, and the per-benchmark call counts in \ref{app:budget}.
+\section{Results}
 \label{sec:results}
 
-\subsection{\textcolor{blue}{Experimental settings}}
+\subsection{Experimental settings}
 \label{sec:results_protocol}
 
 This section reports the four benchmarks in three groups.
@@ -801,14 +800,14 @@ Section~\ref{sec:results_calibration} reports the quality of the calibrated outp
 Sections~\ref{sec:results_release} and~\ref{sec:results_ablation} report the release decisions and the ablations.
 Tables~\ref{tab:base_performance}--\ref{tab:ablation_results} follow this order, and Figures~\ref{fig:conformal_calibration} and~\ref{fig:risk_gating} fix the procedures whose behaviour these tables measure.
 Figures~\ref{fig:candidate_routing}, \ref{fig:cost_ratio} and~\ref{fig:frontier} present the same release decisions in the three forms the discussion relies on, namely their composition, their cost, and their frontier.
-The first two are computed from Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} and introduce no additional measurement; the third requires a sweep of \textcolor{blue}{each gate's release criterion} and is described where it is used.
+The first two are computed from Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} and introduce no additional measurement; the third requires a sweep of each gate's release criterion and is described where it is used.
 
 Release statistics follow the confusion matrix of Table~\ref{tab:exp_release_confusion}, in which an actual violation is the positive class and referral for review is the positive decision, and are computed with Eqs.~\eqref{eq:exp_release_rate} and~\eqref{eq:exp_released_error_rate}.
 Each row of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} is evaluated against the candidate population of the pipeline that produced it, so the released error rate of a row is computed from its own denominator.
-\textcolor{blue}{The raw integer counts underlying every confusion matrix are tabulated in \ref{app:counts}, and recall, specificity, balanced accuracy, the relative reductions of Section~\ref{sec:results_release}, and the cost thresholds of Section~\ref{sec:results_discussion} are all computed from the same counts.}
-\textcolor{blue}{Reported values are means and standard deviations over repeated evaluation seeds.
-For StatQA the language-model candidates are frozen artifacts generated once at temperature zero, and what varies across the seven seeds is the assignment of tasks to the scorer-calibration, conformal-calibration, validation, and test splits\textcolor{blue}{. The} first seed reuses the stratified split released with the benchmark, and the remaining six reshuffle the assignment with the same per-category ratios.
-For the three predictive benchmarks the fitted pipelines are deterministic given the training data, and the three seeds of the experimental configuration vary only model initialisation and calibration partitioning; metrics whose standard deviation vanishes are reported as point values.}
+The raw integer counts underlying every confusion matrix are tabulated in \ref{app:counts}, and recall, specificity, balanced accuracy, the relative reductions of Section~\ref{sec:results_release}, and the cost thresholds of Section~\ref{sec:results_discussion} are all computed from the same counts.
+Reported values are means and standard deviations over repeated evaluation seeds.
+For StatQA the language-model candidates are frozen artifacts generated once at temperature zero, and what varies across the seven seeds is the assignment of tasks to the scorer-calibration, conformal-calibration, validation, and test splits. The first seed reuses the stratified split released with the benchmark, and the remaining six reshuffle the assignment with the same per-category ratios.
+For the three predictive benchmarks the fitted pipelines are deterministic given the training data, and the three seeds of the experimental configuration vary only model initialisation and calibration partitioning; metrics whose standard deviation vanishes are reported as point values.
 Empirical coverage in Section~\ref{sec:results_calibration} is a separate measurement and is not derived from these three quantities.
 Base metrics cover all selected test units, so a high accuracy cannot arise from withholding difficult cases.
 A referred candidate stays in the denominator of the release statistics, which allows a withheld correct result to appear as lower specificity rather than disappearing from the population.
@@ -829,35 +828,35 @@ Table~\ref{tab:base_performance} describes the candidate population, Table~\ref{
 \label{sec:results_base}
 
 Table~\ref{tab:base_performance} reports the base metrics.
-Because the three modules operate after a candidate has been produced, these metrics do not depend on the release decision, and the table \textcolor{blue}{isolates task competence from release behaviour}.
+Because the three modules operate after a candidate has been produced, these metrics do not depend on the release decision, and the table isolates task competence from release behaviour.
 
-TrustStatAgent attains an official accuracy of \textcolor{blue}{73.00$\pm$1.72}\% on StatQA, an accuracy of 84.67\% on Adult, a mean absolute error of \textcolor{blue}{0.3143$\pm$0.0006} on California Housing, and 306.10 on Carbon Monitor.
-The first of these is \textcolor{blue}{7.02} percentage points above the same pipeline without explicit planning (Table~\ref{tab:ablation_results}), and it is above the 64.83\% reported by \citet{zhu2024large} for the strongest model \textcolor{blue}{evaluated on the same mini-StatQA subset}.
-\textcolor{blue}{The comparison is indicative only, since the present setting supplies a data schema and restricts the analysis to a small fixed set of statistical tools (Figure~\ref{fig:planning_execution}), which removes part of the method-selection burden that the benchmark identifies as the dominant error source.}
+TrustStatAgent attains an official accuracy of 73.00$\pm$1.72\% on StatQA, an accuracy of 84.67\% on Adult, a mean absolute error of 0.3143$\pm$0.0006 on California Housing, and 306.10 on Carbon Monitor.
+The first of these is 7.02 percentage points above the same pipeline without explicit planning (Table~\ref{tab:ablation_results}), and it is above the 64.83\% reported by \citet{zhu2024large} for the strongest model evaluated on the same mini-StatQA subset.
+The comparison is indicative only, since the present setting supplies a data schema and restricts the analysis to a small fixed set of statistical tools (Figure~\ref{fig:planning_execution}), which removes part of the method-selection burden that the benchmark identifies as the dominant error source.
 
 The three predictive benchmarks share one statistical tool adapter and one fixed model configuration across methods (Section~\ref{sec:execution}).
-\textcolor{blue}{The ReAct and TrustStatAgent pipelines therefore produce identical candidates on these benchmarks, at 15.33\%, 4.51$\pm$0.09\%, and 3.47\% error, and differ only in the release rule.}
-On StatQA, where planning changes the analysis itself, the ReAct pipeline releases every candidate at a recorded error rate of \textcolor{blue}{28.02$\pm$1.39}\%, which corresponds to \textcolor{blue}{71.98}\% correctness against \textcolor{blue}{73.00}\% for the full pipeline.
-\textcolor{blue}{This is the one benchmark on which the two pipelines differ in what they compute, not only in what they publish.}
+The ReAct and TrustStatAgent pipelines therefore produce identical candidates on these benchmarks, at 15.33\%, 4.51$\pm$0.09\%, and 3.47\% error, and differ only in the release rule.
+On StatQA, where planning changes the analysis itself, the ReAct pipeline releases every candidate at a recorded error rate of 28.02$\pm$1.39\%, which corresponds to 71.98\% correctness against 73.00\% for the full pipeline.
+This is the one benchmark on which the two pipelines differ in what they compute, not only in what they publish.
 
 The same table fixes the population on which the gate has to work.
-The candidate error rate of the full pipeline is \textcolor{blue}{27.00$\pm$1.72}\% on StatQA, 15.33\% on Adult, \textcolor{blue}{4.51$\pm$0.09}\% on California Housing, and 3.47\% on Carbon Monitor, a range of almost one order of magnitude.
-The publish-every-candidate baseline of Table~\ref{tab:release_behaviour} is the ReAct pipeline, whose candidate error rate is \textcolor{blue}{28.02$\pm$1.39}\% on StatQA \textcolor{blue}{and coincides with the full pipeline on the three predictive benchmarks}; the variant without the gate in Table~\ref{tab:ablation_results} uses the full pipeline and yields \textcolor{blue}{27.00$\pm$1.72}\%\textcolor{blue}{, 15.33\%, 4.51$\pm$0.09\%, and 3.47\%}.
-\textcolor{blue}{Where the two rows differ, they differ in the pipeline that generated the candidates, not in the release rule.}
-Most of the variation reported in Sections~\ref{sec:results_release} and~\ref{sec:results_discussion} follows from this range \textcolor{blue}{more than} from the gate, and the four tasks are best read as four different operating regimes.
+The candidate error rate of the full pipeline is 27.00$\pm$1.72\% on StatQA, 15.33\% on Adult, 4.51$\pm$0.09\% on California Housing, and 3.47\% on Carbon Monitor, a range of almost one order of magnitude.
+The publish-every-candidate baseline of Table~\ref{tab:release_behaviour} is the ReAct pipeline, whose candidate error rate is 28.02$\pm$1.39\% on StatQA and coincides with the full pipeline on the three predictive benchmarks; the variant without the gate in Table~\ref{tab:ablation_results} uses the full pipeline and yields 27.00$\pm$1.72\%, 15.33\%, 4.51$\pm$0.09\%, and 3.47\%.
+Where the two rows differ, they differ in the pipeline that generated the candidates, not in the release rule.
+Most of the variation reported in Sections~\ref{sec:results_release} and~\ref{sec:results_discussion} follows from this range more than from the gate, and the four tasks are best read as four different operating regimes.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Base task performance before any release decision, computed over all selected test units. MAE is reported in the unit of the corresponding dataset. \textcolor{blue}{StatQA entries are means and standard deviations over seven data-splitting seeds; the Adult and Carbon Monitor pipelines are deterministic given the data.} The ReAct accuracy on StatQA is the complement of its released error rate, because that entry releases every candidate. Entries marked $\dagger$ coincide with the TrustStatAgent value because the predictive benchmarks share the same tool adapter and configuration in every variant (Section~\ref{sec:execution}).}
+\caption{Base task performance before any release decision, computed over all selected test units. MAE is reported in the unit of the corresponding dataset. StatQA entries are means and standard deviations over seven data-splitting seeds; the Adult and Carbon Monitor pipelines are deterministic given the data. The ReAct accuracy on StatQA is the complement of its released error rate, because that entry releases every candidate. Entries marked $\dagger$ coincide with the TrustStatAgent value because the predictive benchmarks share the same tool adapter and configuration in every variant (Section~\ref{sec:execution}).}
 \label{tab:base_performance}
 \begin{tabularx}{\linewidth}{@{}lccc@{}}
 \toprule
 \textbf{Benchmark} & \textbf{Base metric} & \textbf{ReAct agent} & \textbf{TrustStatAgent}\\
 \midrule
-StatQA & Official accuracy (\%) & \textcolor{blue}{71.98$\pm$1.39} & \textcolor{blue}{73.00$\pm$1.72}\\
+StatQA & Official accuracy (\%) & 71.98$\pm$1.39 & 73.00$\pm$1.72\\
 Adult & Accuracy (\%) & 84.67$^\dagger$ & 84.67\\
-California Housing & MAE & \textcolor{blue}{0.3143$\pm$0.0006}$^\dagger$ & \textcolor{blue}{0.3143$\pm$0.0006}\\
+California Housing & MAE & 0.3143$\pm$0.0006$^\dagger$ & 0.3143$\pm$0.0006\\
 Carbon Monitor & MAE & 306.10$^\dagger$ & 306.10\\
 \bottomrule
 \end{tabularx}
@@ -868,38 +867,38 @@ Carbon Monitor & MAE & 306.10$^\dagger$ & 306.10\\
 
 Figure~\ref{fig:conformal_calibration} summarises the four constructions whose outputs are evaluated here: conformalized quantile regression for California Housing, probability-threshold sets for Adult, the correctness-set construction for StatQA, and the rolling residual interval for Carbon Monitor.
 
-Empirical coverage is 98.53\% on Adult, \textcolor{blue}{84.62$\pm$0.35}\% on California Housing\textcolor{blue}{,} and 92.08\% on Carbon Monitor\textcolor{blue}{, and the correctness-set construction attains 74.66$\pm$1.53\% on StatQA}.
-\textcolor{blue}{The StatQA value sits below the nominal level because the miscoverage level on this task is selected to meet the target operating point of the gate; it does not track $1-\alpha$; coverage is reported here as a diagnostic of the calibrated output, as Section~\ref{sec:results_limitations} discusses.}
+Empirical coverage is 98.53\% on Adult, 84.62$\pm$0.35\% on California Housing, and 92.08\% on Carbon Monitor, and the correctness-set construction attains 74.66$\pm$1.53\% on StatQA.
+The StatQA value sits below the nominal level because the miscoverage level on this task is selected to meet the target operating point of the gate; it does not track $1-\alpha$; coverage is reported here as a diagnostic of the calibrated output, as Section~\ref{sec:results_limitations} discusses.
 Two features of the construction make the realised value conservative with respect to the level the procedure targets.
 The rank $k_\alpha$ in Eq.~\eqref{eq:calibration_threshold} is rounded up and truncated at $n$, so the largest observed score replaces an order statistic that may be unattainable, and both adjustments are conservative for a finite calibration sample.
 For California Housing the correction in Eq.~\eqref{eq:cqr_calibrated_interval} is additionally nonnegative, so calibration can widen the preliminary interval but never narrow it.
 The nominal level is selected per task on the validation split, and the realised coverage is reported as a diagnostic of the calibrated output.
 Under-coverage would be the more damaging outcome whatever that level is, because the release conditions of Table~\ref{tab:calibrated_release_conditions} are stated in terms of the calibrated output.
 
-Coverage on Carbon Monitor \textcolor{blue}{serves as a diagnostic only}.
+Coverage on Carbon Monitor serves as a diagnostic only.
 The rolling rule of Eqs.~\eqref{eq:rolling_residual_scores}--\eqref{eq:rolling_calibrated_interval} conditions on the recent residual scale, so the exchangeability assumption behind the marginal guarantee is not asserted for this task; online conformal methods treat this setting explicitly \citep{angelopoulos2024online}.
 The realised 92.08\% describes behaviour under the drift present in the evaluation period.
 
 Coverage and released correctness diverge, and they diverge in opposite directions on the two task families.
-On California Housing coverage is \textcolor{blue}{84.62}\% while released correctness is 98.13\%.
+On California Housing coverage is 84.62\% while released correctness is 98.13\%.
 Release there requires both endpoints of the calibrated interval to lie inside the tolerance band of Eq.~\eqref{eq:numerical_acceptance_set}, so only candidates with a narrow interval, and therefore a small error, reach publication.
 On Adult the order reverses, with coverage at 98.53\% and released correctness at 97.28\%.
-Release there requires the calibrated set to equal the predicted-class singleton, Eq.~\eqref{eq:categorical_prediction_set}, which \textcolor{blue}{responds to ambiguity, and a confident singleton is not necessarily a correct one}.
+Release there requires the calibrated set to equal the predicted-class singleton, Eq.~\eqref{eq:categorical_prediction_set}, which responds to ambiguity, and a confident singleton is not necessarily a correct one.
 The distinction between the width-based condition of Figure~\ref{fig:conformal_calibration}A and the singleton-based condition of Figure~\ref{fig:conformal_calibration}B accounts for most of the differences in gate performance reported below.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Calibration quality and discrimination of the release decision for TrustStatAgent. Coverage, Eq.~\eqref{eq:exp_coverage}, is computed over all candidates, and recall, specificity, and balanced accuracy, Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy}, over the confusion matrix of Table~\ref{tab:exp_release_confusion}; the error base rates are those of the without-gate row of Table~\ref{tab:ablation_results}. \textcolor{blue}{Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.} Publishing every candidate attains recall 0, specificity 1, and BA 0.5. The last column gives the number of correct results withheld per intercepted error.}
+\caption{Calibration quality and discrimination of the release decision for TrustStatAgent. Coverage, Eq.~\eqref{eq:exp_coverage}, is computed over all candidates, and recall, specificity, and balanced accuracy, Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy}, over the confusion matrix of Table~\ref{tab:exp_release_confusion}; the error base rates are those of the without-gate row of Table~\ref{tab:ablation_results}. Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds. Publishing every candidate attains recall 0, specificity 1, and BA 0.5. The last column gives the number of correct results withheld per intercepted error.}
 \label{tab:calibration_discrimination}
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}lccccc@{}}
 \toprule
 \textbf{Benchmark} & \textbf{Coverage (\%)} & \textbf{Recall (\%)} & \textbf{Specificity (\%)} & \textbf{BA} & \textbf{Referrals per error}\\
 \midrule
-StatQA & \textcolor{blue}{74.66$\pm$1.53} & \textcolor{blue}{92.55$\pm$2.43} & \textcolor{blue}{68.01$\pm$3.09} & \textcolor{blue}{0.803$\pm$0.005} & \textcolor{blue}{0.94}\\
+StatQA & 74.66$\pm$1.53 & 92.55$\pm$2.43 & 68.01$\pm$3.09 & 0.803$\pm$0.005 & 0.94\\
 Adult & 98.53 & 90.39 & 62.38 & 0.764 & 2.30\\
-Calif. Housing & \textcolor{blue}{84.62$\pm$0.35} & \textcolor{blue}{73.83$\pm$1.21} & \textcolor{blue}{64.75$\pm$0.44} & \textcolor{blue}{0.693$\pm$0.006} & \textcolor{blue}{10.13}\\
+Calif. Housing & 84.62$\pm$0.35 & 73.83$\pm$1.21 & 64.75$\pm$0.44 & 0.693$\pm$0.006 & 10.13\\
 Carbon Monitor & 92.08 & 28.57 & 77.95 & 0.533 & 21.50\\
 \bottomrule
 \end{tabularx}
@@ -910,35 +909,34 @@ Carbon Monitor & 92.08 & 28.57 & 77.95 & 0.533 & 21.50\\
 
 Table~\ref{tab:release_behaviour} reports the release rate and the released error rate of the three policies.
 Publishing every candidate reproduces the candidate error rate of the pipeline that produced it and serves as the upper bound on automation.
-The two baselines of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} differ by \textcolor{blue}{1.02} percentage points on StatQA \textcolor{blue}{and coincide on the predictive benchmarks}, because they are the same policy applied to the ReAct and full candidate pools, as Section~\ref{sec:results_base} explains.
+The two baselines of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} differ by 1.02 percentage points on StatQA and coincide on the predictive benchmarks, because they are the same policy applied to the ReAct and full candidate pools, as Section~\ref{sec:results_base} explains.
 Figure~\ref{fig:risk_gating} shows the routing that produces these numbers: a candidate is released only when execution succeeds, the uncertainty output is valid, and the acceptance test of Table~\ref{tab:calibrated_release_conditions} is met, and every referred candidate carries the condition it failed.
 Figure~\ref{fig:candidate_routing} decomposes the same decision into the four outcomes of the confusion matrix of Table~\ref{tab:exp_release_confusion}.
-Each block describes one candidate population twice\textcolor{blue}{, first} released without the gate and then passed through it.
-Because the boundary between error-related and correct-related segments falls at the same position in both bars, the figure shows that the gate reallocates candidates within a fixed error budget \textcolor{blue}{while leaving the budget itself unchanged}.
+Each block describes one candidate population twice, first released without the gate and then passed through it.
+Because the boundary between error-related and correct-related segments falls at the same position in both bars, the figure shows that the gate reallocates candidates within a fixed error budget while leaving the budget itself unchanged.
 What differs across benchmarks is where the reallocation lands, and that is the subject of the rest of this section.
 
 \begin{sloppypar}
-\textcolor{blue}{TrustStatAgent attains the lowest released error rate among the compared policies on all three predictive benchmarks: 2.72\% on Adult, 1.87$\pm$0.08\% on California Housing, and 3.18\% on Carbon Monitor, against 3.22\%, 1.99$\pm$0.06\%, and 3.93\% for conventional gating, with the California Housing gap holding on every seed.
-On StatQA the calibrated gate releases 51.66$\pm$3.37\% of candidates at 3.82$\pm$1.04\% error, against 49.20$\pm$2.32\% at 3.49$\pm$1.03\% for conventional gating: the two error rates overlap across seeds, so the calibrated rule buys 2.46 additional percentage points of automation at an error rate that is statistically indistinguishable.}
+TrustStatAgent attains the lowest released error rate among the compared policies on all three predictive benchmarks: 2.72\% on Adult, 1.87$\pm$0.08\% on California Housing, and 3.18\% on Carbon Monitor, against 3.22\%, 1.99$\pm$0.06\%, and 3.93\% for conventional gating, with the California Housing gap holding on every seed.
+On StatQA the calibrated gate releases 51.66$\pm$3.37\% of candidates at 3.82$\pm$1.04\% error, against 49.20$\pm$2.32\% at 3.49$\pm$1.03\% for conventional gating: the two error rates overlap across seeds, so the calibrated rule buys 2.46 additional percentage points of automation at an error rate that is statistically indistinguishable.
 \end{sloppypar}
-Relative to publishing every candidate from the same pipeline, \textcolor{blue}{the reductions are 85.9\%, 82.3\%, 58.5\%, and 8.4\%}.
+Relative to publishing every candidate from the same pipeline, the reductions are 85.9\%, 82.3\%, 58.5\%, and 8.4\%.
 The four cases differ in what that reduction costs, and the difference is informative.
 
-\textcolor{blue}{On StatQA the comparison extends to the confidence signal itself.}
-\textcolor{blue}{Table~\ref{tab:gate_signals} isolates the signal from the decision rule.
+On StatQA the comparison extends to the confidence signal itself.
+Table~\ref{tab:gate_signals} isolates the signal from the decision rule.
 Gating on the model's self-reported confidence, the mechanism closest to current practice~\citep{kadavath2022language}, releases 27.22$\pm$1.59\% of candidates at 3.57$\pm$1.60\% error: the calibrated gate releases about twice as many candidates at a comparable error rate.
 The reason is visible in the validation AUC.
 The trained correctness score separates right from wrong answers at 0.939$\pm$0.016, whereas the model's self-assessment attains 0.618$\pm$0.010, barely above chance on a candidate pool that is 73\% correct.
-Self-reported confidence is therefore an informative signal about the model, but a weak signal about the result, which is what the gate has to discriminate.}
-\textcolor{blue}{Conventional gating applies a validation-tuned threshold to the same trained score, evaluated on the ReAct candidate pool, where it attains a comparable AUC of 0.949$\pm$0.012; what the conformal construction adds is the finite-sample basis for choosing where on that curve to operate, and it is this choice that keeps the release rate above the target of 50\% without exceeding the error ceiling.}
+Self-reported confidence is therefore an informative signal about the model, but a weak signal about the result, which is what the gate has to discriminate.
+Conventional gating applies a validation-tuned threshold to the same trained score, evaluated on the ReAct candidate pool, where it attains a comparable AUC of 0.949$\pm$0.012; what the conformal construction adds is the finite-sample basis for choosing where on that curve to operate, and it is this choice that keeps the release rate above the target of 50\% without exceeding the error ceiling.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{\textcolor{blue}{Gating signals on StatQA, averaged over the seven data-splitting seeds. The first two rows share the trained correctness score and differ in the candidate pool and the decision rule; the third row gates on the model's self-reported probability of correctness, elicited once per candidate. AUC is computed on the validation split against the official correctness labels.}}
+\caption{Gating signals on StatQA, averaged over the seven data-splitting seeds. The first two rows share the trained correctness score and differ in the candidate pool and the decision rule; the third row gates on the model's self-reported probability of correctness, elicited once per candidate. AUC is computed on the validation split against the official correctness labels.}
 \label{tab:gate_signals}
 \setlength{\tabcolsep}{3pt}
-{\color{blue}
 \begin{tabularx}{\linewidth}{@{}Xcccc@{}}
 \toprule
 \textbf{Gating signal} & \textbf{Validation AUC} & \textbf{Release (\%)} & \textbf{Released err. (\%)} & \textbf{BA}\\
@@ -948,7 +946,6 @@ Validation-tuned gate & 0.949$\pm$0.012 & 49.20$\pm$2.32 & 3.49$\pm$1.03 & 0.799
 Self-reported gate & 0.618$\pm$0.010 & 27.22$\pm$1.59 & 3.57$\pm$1.60 & 0.661$\pm$0.008\\
 \bottomrule
 \end{tabularx}
-}
 \end{table}
 
 Adult shows the case in which the gate acts on ambiguity.
@@ -958,26 +955,26 @@ The cost appears in the referral load: 45.71\% of the population is referred, of
 The calibrated rule therefore gives up 2.9 percentage points of automation to remove half a percentage point of error, an exchange worth making only if a referral is much cheaper than a published mistake.
 
 On California Housing the interval width carries information about error magnitude, and the gate uses it directly.
-It releases \textcolor{blue}{63.01$\pm$0.47}\% of cases with a released error rate of \textcolor{blue}{1.87$\pm$0.08}\% and intercepts \textcolor{blue}{73.83$\pm$1.21}\% of violating predictions, against \textcolor{blue}{66.46$\pm$0.55}\% released at \textcolor{blue}{1.99$\pm$0.06}\% for conventional gating\textcolor{blue}{, an ordering that holds on every seed}.
-The trade is \textcolor{blue}{3.5} percentage points of automation for \textcolor{blue}{0.12} percentage points of error, and the referral ratio makes the price explicit: \textcolor{blue}{33.67}\% of the population are correct results withheld, or \textcolor{blue}{10.1} referrals per intercepted error.
+It releases 63.01$\pm$0.47\% of cases with a released error rate of 1.87$\pm$0.08\% and intercepts 73.83$\pm$1.21\% of violating predictions, against 66.46$\pm$0.55\% released at 1.99$\pm$0.06\% for conventional gating, an ordering that holds on every seed.
+The trade is 3.5 percentage points of automation for 0.12 percentage points of error, and the referral ratio makes the price explicit: 33.67\% of the population are correct results withheld, or 10.1 referrals per intercepted error.
 A gate that intercepts most of a small violating subset necessarily withholds a larger absolute number of correct results.
 
 Carbon Monitor separates the policies most sharply, and the comparison is not a trade at all.
 Conventional gating releases 88.12\% of forecasts and intercepts none of the 3.47\% violating ones, so its released error rate, 3.93\%, is higher than that of publishing everything; it withholds 11.88\% of the population without removing a single error.
-We attribute this to the \textcolor{blue}{structure of the task itself}.
+We attribute this to the structure of the task itself.
 The forecaster is the previous observation (Section~\ref{sec:uncertainty_calibration}), so the interval of Eq.~\eqref{eq:rolling_calibrated_interval} reflects nothing but the recent residual scale.
 When the series has been calm the interval is narrow, and a level shift then produces a large error together with a narrow interval.
 A rule that responds to width therefore misses exactly the errors that follow calm periods, and a threshold tuned on validation records inherits the same failure because it responds to the same quantity.
 The calibrated rule intercepts 28.57\% of violations and releases 77.72\% at 3.18\%, which is 10.4 percentage points fewer forecasts than the conventional policy.
 
-Across the four benchmarks the same rule releases between \textcolor{blue}{51.66}\% and 77.72\% of candidates.
+Across the four benchmarks the same rule releases between 51.66\% and 77.72\% of candidates.
 The spread is intended.
 The rule publishes the subset whose calibrated output satisfies the acceptance region of its task and imposes no publication quota, so the released fraction follows the uncertainty of the task.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Release behaviour of the three policies on the test partition. Publishing every candidate reproduces the candidate error rate of Table~\ref{tab:base_performance}. Conventional gating applies a threshold tuned on validation records to uncalibrated intervals or confidence scores. \textcolor{blue}{Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.}}
+\caption{Release behaviour of the three policies on the test partition. Publishing every candidate reproduces the candidate error rate of Table~\ref{tab:base_performance}. Conventional gating applies a threshold tuned on validation records to uncalibrated intervals or confidence scores. Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.}
 \label{tab:release_behaviour}
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}lcccccc@{}}
@@ -986,9 +983,9 @@ The rule publishes the subset whose calibrated output satisfies the acceptance r
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
 \textbf{Benchmark} & Release (\%) & Error (\%) & Release (\%) & Error (\%) & Release (\%) & Error (\%)\\
 \midrule
-StatQA & 100.00 & \textcolor{blue}{28.02$\pm$1.39} & \textcolor{blue}{49.20$\pm$2.32} & \textcolor{blue}{3.49$\pm$1.03} & \textcolor{blue}{51.66$\pm$3.37} & \textcolor{blue}{3.82$\pm$1.04}\\
+StatQA & 100.00 & 28.02$\pm$1.39 & 49.20$\pm$2.32 & 3.49$\pm$1.03 & 51.66$\pm$3.37 & 3.82$\pm$1.04\\
 Adult & 100.00 & 15.33 & 57.18 & 3.22 & 54.29 & 2.72\\
-Calif. Housing & 100.00 & \textcolor{blue}{4.51$\pm$0.09} & \textcolor{blue}{66.46$\pm$0.55} & \textcolor{blue}{1.99$\pm$0.06} & \textcolor{blue}{63.01$\pm$0.47} & \textcolor{blue}{1.87$\pm$0.08}\\
+Calif. Housing & 100.00 & 4.51$\pm$0.09 & 66.46$\pm$0.55 & 1.99$\pm$0.06 & 63.01$\pm$0.47 & 1.87$\pm$0.08\\
 Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \bottomrule
 \end{tabularx}
@@ -1076,7 +1073,7 @@ Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \fill[cHold] (46,-6.42) rectangle (49.1,-6.18);
 \node[anchor=west,font=\footnotesize] at (50,-6.30) {correct withheld};
 \end{tikzpicture}
-\caption{Composition of the release decision. Each block shows one candidate population twice: released without the gate (upper bar) and through the gate (lower bar); lengths are percentages of the population, decomposed from the without-gate row of Table~\ref{tab:ablation_results}. Segments narrower than five percent are left unlabelled. \textcolor{blue}{The two error segments have the same combined length in both bars of a block, so the gate reallocates candidates within a fixed error budget. On Carbon Monitor the released error segment exceeds the intercepted one, and the gate is least active on the benchmark where its detection is weakest.}}
+\caption{Composition of the release decision. Each block shows one candidate population twice: released without the gate (upper bar) and through the gate (lower bar); lengths are percentages of the population, decomposed from the without-gate row of Table~\ref{tab:ablation_results}. Segments narrower than five percent are left unlabelled. The two error segments have the same combined length in both bars of a block, so the gate reallocates candidates within a fixed error budget. On Carbon Monitor the released error segment exceeds the intercepted one, and the gate is least active on the benchmark where its detection is weakest.}
 \label{fig:candidate_routing}
 \end{figure}
 
@@ -1084,93 +1081,93 @@ Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \label{sec:results_ablation}
 
 Table~\ref{tab:ablation_results} isolates the three components.
-Removing explicit planning lowers StatQA accuracy from \textcolor{blue}{73.00$\pm$1.72}\% to \textcolor{blue}{65.98$\pm$1.81}\%, a difference of \textcolor{blue}{7.02} percentage points under the official criterion.
-The plan helps because it is an executable intermediate representation\textcolor{blue}{, not a narrative}.
+Removing explicit planning lowers StatQA accuracy from 73.00$\pm$1.72\% to 65.98$\pm$1.81\%, a difference of 7.02 percentage points under the official criterion.
+The plan helps because it is an executable intermediate representation, not a narrative.
 It records the task type, the response variable, the selected inputs, the method, the preprocessing, and the tool sequence, and each field is later checked against the execution log.
 Without it the agent still calls the tools, but variable and method selection become implicit and are correspondingly harder to verify.
 
 Removing the gate releases every candidate that holds a valid calibrated output.
-The released error rate then becomes \textcolor{blue}{27.00$\pm$1.72}\% on StatQA, 15.33\% on Adult, \textcolor{blue}{4.51$\pm$0.09}\% on California Housing, and 3.47\% on Carbon Monitor.
+The released error rate then becomes 27.00$\pm$1.72\% on StatQA, 15.33\% on Adult, 4.51$\pm$0.09\% on California Housing, and 3.47\% on Carbon Monitor.
 These values reproduce the candidate error rates of Section~\ref{sec:results_base}, as they must when no candidate is withheld; for StatQA and Adult they are also the complements of the accuracies in Table~\ref{tab:base_performance}.
 The agreement confirms that the release statistics and the base metrics share a denominator, and that the gate is the only source of selectivity in Table~\ref{tab:release_behaviour}.
 
-\textcolor{blue}{Removing calibration moves the operating point; it does not destroy the gate.
-On StatQA the variant releases 71.15$\pm$1.86\% of candidates at 4.66$\pm$0.80\% error, against 51.66$\pm$3.37\% at 3.82$\pm$1.04\% for the full model: deprived of the calibrated set, the gate falls back on the raw correctness score at a fixed threshold of 0.5, which lands at a substantially more permissive point and releases nineteen percentage points more candidates at a higher error rate.}
+Removing calibration moves the operating point; it does not destroy the gate.
+On StatQA the variant releases 71.15$\pm$1.86\% of candidates at 4.66$\pm$0.80\% error, against 51.66$\pm$3.37\% at 3.82$\pm$1.04\% for the full model: deprived of the calibrated set, the gate falls back on the raw correctness score at a fixed threshold of 0.5, which lands at a substantially more permissive point and releases nineteen percentage points more candidates at a higher error rate.
 On Adult and Carbon Monitor the variant degenerates to unrestricted publication, at 100\% release and the candidate error rate of 15.33\% and 3.47\%, for a structural reason.
 The acceptance conditions of Table~\ref{tab:calibrated_release_conditions} are stated on the calibrated output, so without calibration the preset requirements cannot be evaluated and the gate defaults to release.
 The variant was not retuned, as specified in Section~\ref{sec:ablation_studies}, since allowing the threshold to be re-optimised would reintroduce the validation tuning that the comparison is meant to isolate.
-California Housing is the informative exception: there the variant still releases \textcolor{blue}{64.10$\pm$0.39}\% of candidates at \textcolor{blue}{1.88$\pm$0.09}\%, \textcolor{blue}{statistically indistinguishable from the full model}, because the preliminary quantile interval already has approximately the scale that the tolerance band requires.
+California Housing is the informative exception: there the variant still releases 64.10$\pm$0.39\% of candidates at 1.88$\pm$0.09\%, statistically indistinguishable from the full model, because the preliminary quantile interval already has approximately the scale that the tolerance band requires.
 Calibration therefore contributes least where the uncalibrated interval is already close to the acceptance region, which is what the construction of Eq.~\eqref{eq:cqr_calibrated_interval} predicts.
 
-The two reliability modules are complementary\textcolor{blue}{; neither can substitute for the other}.
+The two reliability modules are complementary; neither can substitute for the other.
 Calibration supplies a scale on which a violation can be measured, and the gate turns that scale into a decision.
 Calibration alone does not decide publication, since a valid interval can still fall outside the tolerance band; gating without calibration has no quantity to threshold, which is why two of the three predictive benchmarks collapse to release-all.
-The behaviour of conventional gating on Carbon Monitor agrees with this reading\textcolor{blue}{. It} is a gate applied to an uncalibrated scale, and it intercepts nothing when that scale stops tracking the error.
+The behaviour of conventional gating on Carbon Monitor agrees with this reading. It is a gate applied to an uncalibrated scale, and it intercepts nothing when that scale stops tracking the error.
 
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Ablation results. The variant without the gate releases every candidate that holds a valid calibrated output, so its released error rate reproduces the candidate error rate of Section~\ref{sec:results_base}. \textcolor{blue}{Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.}}
+\caption{Ablation results. The variant without the gate releases every candidate that holds a valid calibrated output, so its released error rate reproduces the candidate error rate of Section~\ref{sec:results_base}. Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.}
 \label{tab:ablation_results}
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}llcccc@{}}
 \toprule
 \textbf{Variant} & \textbf{Metric} & \textbf{StatQA} & \textbf{Adult} & \textbf{Calif. Housing} & \textbf{Carbon Monitor}\\
 \midrule
-Publish all (ReAct) & Released err. (\%) & \textcolor{blue}{28.02$\pm$1.39} & 15.33 & \textcolor{blue}{4.51$\pm$0.09} & 3.47\\
-w/o Risk Gate & Released err. (\%) & \textcolor{blue}{27.00$\pm$1.72} & 15.33 & \textcolor{blue}{4.51$\pm$0.09} & 3.47\\
-w/o Conformal Calib. & Released err. (\%) & \textcolor{blue}{4.66$\pm$0.80} & 15.33 & \textcolor{blue}{1.88$\pm$0.09} & 3.47\\
-Full Model & Released err. (\%) & \textcolor{blue}{3.82$\pm$1.04} & 2.72 & \textcolor{blue}{1.87$\pm$0.08} & 3.18\\
+Publish all (ReAct) & Released err. (\%) & 28.02$\pm$1.39 & 15.33 & 4.51$\pm$0.09 & 3.47\\
+w/o Risk Gate & Released err. (\%) & 27.00$\pm$1.72 & 15.33 & 4.51$\pm$0.09 & 3.47\\
+w/o Conformal Calib. & Released err. (\%) & 4.66$\pm$0.80 & 15.33 & 1.88$\pm$0.09 & 3.47\\
+Full Model & Released err. (\%) & 3.82$\pm$1.04 & 2.72 & 1.87$\pm$0.08 & 3.18\\
 \midrule
-w/o Explicit Planning & Accuracy (\%) & \textcolor{blue}{65.98$\pm$1.81} & --- & --- & ---\\
-Full Model & Accuracy (\%) & \textcolor{blue}{73.00$\pm$1.72} & --- & --- & ---\\
+w/o Explicit Planning & Accuracy (\%) & 65.98$\pm$1.81 & --- & --- & ---\\
+Full Model & Accuracy (\%) & 73.00$\pm$1.72 & --- & --- & ---\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\section{\textcolor{blue}{Discussion}}
+\section{Discussion}
 \label{sec:results_discussion}
 
-The four benchmarks divide the work of the gate in a consistent way, and the division follows two properties of the task\textcolor{blue}{ itself}.
+The four benchmarks divide the work of the gate in a consistent way, and the division follows two properties of the task itself.
 
 The first is the base error rate.
-Balanced accuracy is \textcolor{blue}{0.803} on StatQA at a \textcolor{blue}{27.00}\% base rate, 0.764 on Adult at 15.33\%, \textcolor{blue}{0.693} on California Housing at \textcolor{blue}{4.51}\%, and 0.533 on Carbon Monitor at 3.47\%.
+Balanced accuracy is 0.803 on StatQA at a 27.00\% base rate, 0.764 on Adult at 15.33\%, 0.693 on California Housing at 4.51\%, and 0.533 on Carbon Monitor at 3.47\%.
 Intercepting a rare violation without withholding most correct results is a harder discrimination problem than intercepting a frequent one, and the ranking follows the base rate closely.
-On Carbon Monitor, 0.533 is barely above the 0.5 attained by publishing everything, so the reliability argument on that task rests on calibrated coverage and on the fact that the conventional rule intercepts nothing\textcolor{blue}{; it does not rest on the discriminative power of the gate}.
+On Carbon Monitor, 0.533 is barely above the 0.5 attained by publishing everything, so the reliability argument on that task rests on calibrated coverage and on the fact that the conventional rule intercepts nothing; it does not rest on the discriminative power of the gate.
 The second property is the form of the acceptance condition.
-A width-based condition is approximately monotone in the error magnitude, which is why California Housing intercepts \textcolor{blue}{73.83}\% of violations from a base rate of only \textcolor{blue}{4.51}\%, whereas a singleton condition responds to ambiguity and separates confident correct predictions from confident incorrect ones much less sharply.
+A width-based condition is approximately monotone in the error magnitude, which is why California Housing intercepts 73.83\% of violations from a base rate of only 4.51\%, whereas a singleton condition responds to ambiguity and separates confident correct predictions from confident incorrect ones much less sharply.
 
-Balanced accuracy, however, separates the two gates only where the base rate is high or the competing scale is broken: \textcolor{blue}{0.803 against 0.799} on StatQA and 0.533 against 0.438 on Carbon Monitor.
-On Adult and California Housing the two rules sit within 0.005 of each other (0.764 against 0.767, and \textcolor{blue}{0.693 against 0.694}), so the aggregate discrimination is effectively the same and the difference appears in where the operating point sits: the calibrated rule intercepts slightly more violations and withholds slightly more correct results.
-This is why the released error rate and the release rate are reported as a pair\textcolor{blue}{, not collapsed into a single discriminative score}.
+Balanced accuracy, however, separates the two gates only where the base rate is high or the competing scale is broken: 0.803 against 0.799 on StatQA and 0.533 against 0.438 on Carbon Monitor.
+On Adult and California Housing the two rules sit within 0.005 of each other (0.764 against 0.767, and 0.693 against 0.694), so the aggregate discrimination is effectively the same and the difference appears in where the operating point sits: the calibrated rule intercepts slightly more violations and withholds slightly more correct results.
+This is why the released error rate and the release rate are reported as a pair, not collapsed into a single discriminative score.
 
 These two properties also define the trade-off that the release decision has to resolve.
 Tightening the tolerance parameter $\Delta$ withholds more results and lowers the released error rate, while loosening it does the reverse.
-The two quantities therefore cannot be improved together by moving a single threshold, and Fig.~\ref{fig:frontier} traces the frontier obtained when \textcolor{blue}{the release criterion of each gate} is swept with the rest of the pipeline fixed.
+The two quantities therefore cannot be improved together by moving a single threshold, and Fig.~\ref{fig:frontier} traces the frontier obtained when the release criterion of each gate is swept with the rest of the pipeline fixed.
 Read as a frontier, the comparison in Section~\ref{sec:results_release} supports a specific claim.
-\textcolor{blue}{On StatQA the calibrated rule releases 2.46 percentage points more candidates than the conventional one at an error rate that is statistically indistinguishable across seeds, and it dominates the verbalized-confidence gate outright, releasing about twice as many candidates at a comparable error rate.}
-On the other three benchmarks it moves along the frontier \textcolor{blue}{without pushing it outward}, buying \textcolor{blue}{0.12} to 0.75 percentage points of released error with 2.9 to 10.4 percentage points of automation.
-On Carbon Monitor the conventional policy is not on the frontier at all\textcolor{blue}{. It} releases less than publishing everything and errs more, because it intercepts no violations.
+On StatQA the calibrated rule releases 2.46 percentage points more candidates than the conventional one at an error rate that is statistically indistinguishable across seeds, and it dominates the verbalized-confidence gate outright, releasing about twice as many candidates at a comparable error rate.
+On the other three benchmarks it moves along the frontier without pushing it outward, buying 0.12 to 0.75 percentage points of released error with 2.9 to 10.4 percentage points of automation.
+On Carbon Monitor the conventional policy is not on the frontier at all. It releases less than publishing everything and errs more, because it intercepts no violations.
 A point of that kind cannot be a conservative choice; it is a threshold applied to the wrong quantity.
 
-The relative weight of the two quantities \textcolor{blue}{belongs to the deployment}.
+The relative weight of the two quantities belongs to the deployment.
 Let $c_e$ be the cost of a published violation and $c_r$ the cost of one referral.
 The expected cost per candidate is proportional to $c_e\,r\,e + c_r\,(1-r)$, where $r$ is the release rate and $e$ the released error rate.
-The ratio at which the reported operating point becomes cheaper than publishing everything follows from the same expression and equals $\rho^{\ast}=(1-r)/(p-r\,e)$, which is \textcolor{blue}{1.93} on StatQA, 3.30 on Adult, \textcolor{blue}{11.1} on California Housing, and \textcolor{blue}{22.3} on Carbon Monitor.
+The ratio at which the reported operating point becomes cheaper than publishing everything follows from the same expression and equals $\rho^{\ast}=(1-r)/(p-r\,e)$, which is 1.93 on StatQA, 3.30 on Adult, 11.1 on California Housing, and 22.3 on Carbon Monitor.
 Figure~\ref{fig:cost_ratio} plots the comparison on which these numbers rest.
-The relative cost falls monotonically in the ratio, crosses parity at the quoted value, and then flattens at a level fixed by the two error rates, so the threshold \textcolor{blue}{follows from the operating point, whatever the cost model}.
+The relative cost falls monotonically in the ratio, crosses parity at the quoted value, and then flattens at a level fixed by the two error rates, so the threshold follows from the operating point, whatever the cost model.
 These thresholds are modest.
 On the two tasks where a violation is common, a published error need only cost two to three times a referral for the gate to pay for itself.
 On the two numerical tasks, violations are rare and most referrals are unnecessary, so the same argument requires an order of magnitude more.
 The comparison with conventional gating resolves in the same way.
-Writing $r_c$ and $e_c$ for its recorded rates, the calibrated rule is cheaper once the ratio exceeds $\rho=(r-r_c)/(r\,e-r_c\,e_c)$\textcolor{blue}{; the value is 9.6 on StatQA, 7.9 on Adult, 23.9 on California Housing and 10.5 on Carbon Monitor.}
-The referral load implied by the reported operating points is \textcolor{blue}{48.34}\% of the population on StatQA, 45.71\% on Adult, \textcolor{blue}{36.99}\% on California Housing, and 22.28\% on Carbon Monitor, which is the quantity an operator would size review capacity against.
+Writing $r_c$ and $e_c$ for its recorded rates, the calibrated rule is cheaper once the ratio exceeds $\rho=(r-r_c)/(r\,e-r_c\,e_c)$; the value is 9.6 on StatQA, 7.9 on Adult, 23.9 on California Housing and 10.5 on Carbon Monitor.
+The referral load implied by the reported operating points is 48.34\% of the population on StatQA, 45.71\% on Adult, 36.99\% on California Housing, and 22.28\% on Carbon Monitor, which is the quantity an operator would size review capacity against.
 
 Two implications follow for the design of expert systems.
 The first concerns where the release decision is taken.
-In this workflow the decision is made by a program whose inputs, namely the execution log, the calibrated output, and the acceptance region, are inspectable and can be attached to the referral; a system that asks the model to report its own confidence has no equivalent audit trail\textcolor{blue}{, and the comparison of Section~\ref{sec:results_release} shows that the objection is empirical as well as architectural: self-reported confidence attains a validation AUC of 0.62 on StatQA, against 0.94 for the trained correctness score}.
+In this workflow the decision is made by a program whose inputs, namely the execution log, the calibrated output, and the acceptance region, are inspectable and can be attached to the referral; a system that asks the model to report its own confidence has no equivalent audit trail, and the comparison of Section~\ref{sec:results_release} shows that the objection is empirical as well as architectural: self-reported confidence attains a validation AUC of 0.62 on StatQA, against 0.94 for the trained correctness score.
 The second concerns the isolation of the calibration set.
-Because the calibration split is excluded from model fitting and its labels never reach the LLM, the marginal guarantee \textcolor{blue}{attaches to} a procedure\textcolor{blue}{, not to} the model's self-assessment, which is what distinguishes a calibrated gate from a threshold applied to a heuristic score.
+Because the calibration split is excluded from model fitting and its labels never reach the LLM, the marginal guarantee attaches to a procedure, not to the model's self-assessment, which is what distinguishes a calibrated gate from a threshold applied to a heuristic score.
 
 The results also locate the contribution relative to existing work.
 Selective prediction formalises the risk--coverage trade-off used here \citep{geifman2017selective,elyaniv2010foundations}, and selective generation applies it to language models \citep{lee2024selective}.
@@ -1178,7 +1175,7 @@ Conformal language modelling constructs output sets with coverage guarantees \ci
 The difference is in what the calibrated quantity is attached to.
 In those settings the conformal set describes the uncertainty of a generated answer; here it describes the uncertainty of a computational result whose execution can also be checked, and the release rule of Eq.~\eqref{eq:unified_release_gate} requires both.
 That combination has a practical consequence.
-\textcolor{blue}{On Carbon Monitor, conventional gating fails because its width signal no longer tracks the error, a condition that threshold tuning cannot repair and that an execution-grounded calibration can register.}
+On Carbon Monitor, conventional gating fails because its width signal no longer tracks the error, a condition that threshold tuning cannot repair and that an execution-grounded calibration can register.
 
 \begin{figure}[t]
 \centering
@@ -1232,18 +1229,18 @@ That combination has a practical consequence.
 \draw[cC,line width=0.9pt] (1.28,6.80) -- (1.38,6.80);
 \node[anchor=west,font=\scriptsize] at (1.41,6.80) {Carbon Monitor};
 \end{tikzpicture}
-\caption{Relative expected cost of the gated policy against publishing everything, as a function of the cost ratio $\rho=c_e/c_r$. The model is $\rho\,r\,e+(1-r)$ per candidate, with $r$ and $e$ from Table~\ref{tab:release_behaviour}. Curves cross the break-even line at the values quoted in the text and flatten at $re/p$ (\textcolor{blue}{0.07 on StatQA, 0.10 on Adult, 0.26 on California Housing and 0.71 on Carbon Monitor}); the horizontal axis is logarithmic. \textcolor{blue}{The Carbon Monitor plateau sits close to one: even an unbounded penalty on published errors recovers less than a third of the baseline cost.}}
+\caption{Relative expected cost of the gated policy against publishing everything, as a function of the cost ratio $\rho=c_e/c_r$. The model is $\rho\,r\,e+(1-r)$ per candidate, with $r$ and $e$ from Table~\ref{tab:release_behaviour}. Curves cross the break-even line at the values quoted in the text and flatten at $re/p$ (0.07 on StatQA, 0.10 on Adult, 0.26 on California Housing and 0.71 on Carbon Monitor); the horizontal axis is logarithmic. The Carbon Monitor plateau sits close to one: even an unbounded penalty on published errors recovers less than a third of the baseline cost.}
 \label{fig:cost_ratio}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/frontier.pdf}
-\caption{\textcolor{blue}{Released error rate against release rate at the reference configuration: (a) StatQA under the official benchmark split, (b) Carbon Monitor at the reference seed. Each frontier is traced by sweeping the release criterion of the corresponding gate with the generator, the correctness scorer, and the calibration procedure held fixed; the markers give the operating points reported in Table~\ref{tab:release_behaviour}. On StatQA the two frontiers nearly coincide, so the policies differ in how the operating point is selected, not in the trade-off available, and the verbalized-confidence operating point lies strictly above the frontier. On Carbon Monitor the frontier is erratic under the rolling regime: the validation-tuned operating point sits above the error rate of publishing every candidate, while the calibrated operating point sits below it.}}
+\caption{Released error rate against release rate at the reference configuration: (a) StatQA under the official benchmark split, (b) Carbon Monitor at the reference seed. Each frontier is traced by sweeping the release criterion of the corresponding gate with the generator, the correctness scorer, and the calibration procedure held fixed; the markers give the operating points reported in Table~\ref{tab:release_behaviour}. On StatQA the two frontiers nearly coincide, so the policies differ in how the operating point is selected, not in the trade-off available, and the verbalized-confidence operating point lies strictly above the frontier. On Carbon Monitor the frontier is erratic under the rolling regime: the validation-tuned operating point sits above the error rate of publishing every candidate, while the calibrated operating point sits below it.}
 \label{fig:frontier}
 \end{figure}
 
-\section{\textcolor{blue}{Limitations}}
+\section{Limitations}
 \label{sec:results_limitations}
 
 Two assumptions carry most of the theoretical weight, and both are weaker than the experiments may suggest.
@@ -1252,12 +1249,12 @@ On StatQA the calibration units are benchmark items that differ in difficulty an
 The bound of Eq.~\eqref{eq:release_violation_inclusion} is likewise a joint-event statement; the error rate among released results remains an empirical quantity, computed on the subset selected by the gate.
 The nominal coverage level of each task is a configuration entry selected on the validation split; this is a reporting choice and does not weaken the guarantee, which holds for the procedure whatever value $\alpha$ takes.
 
-\textcolor{blue}{The reported figures average over repeated data-splitting seeds, seven for StatQA and three for the predictive benchmarks, which quantifies the variation induced by calibration and validation partitioning.
+The reported figures average over repeated data-splitting seeds, seven for StatQA and three for the predictive benchmarks, which quantifies the variation induced by calibration and validation partitioning.
 Two scope conditions remain.
 The StatQA comparison with conventional gating is a tie in error control: the released error rates overlap across seeds, 3.82$\pm$1.04\% against 3.49$\pm$1.03\%, and the case for the calibrated rule on that benchmark rests on its higher release rate, its large margin over verbalized-confidence gating, and the finite-sample basis of its operating point.
 And the language-model candidates are generated once at temperature zero and then frozen, so the repetition varies the evaluation protocol, not the generator itself.
-The conclusions therefore rest on the effects that persist across seeds\textcolor{blue}{, namely} the order-of-magnitude reduction against unrestricted publication, the lowest released error rate on all three predictive benchmarks, and the complete failure of the conventional rule on Carbon Monitor.}
-The tolerance parameter $\Delta$ is \textcolor{blue}{fixed in advance, not learned}, and Fig.~\ref{fig:frontier} characterises its effect along one axis only, so a sensitivity analysis across tasks is still needed before the operating point can be recommended as a default.
+The conclusions therefore rest on the effects that persist across seeds, namely the order-of-magnitude reduction against unrestricted publication, the lowest released error rate on all three predictive benchmarks, and the complete failure of the conventional rule on Carbon Monitor.
+The tolerance parameter $\Delta$ is fixed in advance, not learned, and Fig.~\ref{fig:frontier} characterises its effect along one axis only, so a sensitivity analysis across tasks is still needed before the operating point can be recommended as a default.
 Finally, the StatQA correctness scorer is a TF--IDF logistic regression frozen after training on a dedicated split (Section~\ref{sec:execution}).
 This removes judge noise from the present study and means that the calibration target would have to be re-established wherever correctness is adjudicated by a different rule or by a model.
 
@@ -1265,30 +1262,29 @@ This removes judge noise from the present study and means that the calibration t
 \label{sec:conclusion}
 
 This paper addressed the point at which a statistical agent stops producing a result and starts publishing one.
-\textcolor{blue}{The difficulty lies outside computation, since a tool can fit a model and a language model can plan which model to fit.
-An uncalibrated confidence score gives no finite-sample basis for deciding whether a particular result is safe to release, and a reliability criterion taken alone can be satisfied by publishing nothing.}
+The difficulty lies outside computation, since a tool can fit a model and a language model can plan which model to fit.
+An uncalibrated confidence score gives no finite-sample basis for deciding whether a particular result is safe to release, and a reliability criterion taken alone can be satisfied by publishing nothing.
 We therefore treated statistical accuracy and publishing reliability as a joint objective and proposed TrustStatAgent.
 A tool-restricted planner produces candidates, conformal calibration attaches a coverage statement to each candidate, and a deterministic gate releases only those results whose execution is compliant and whose calibrated output lies inside the task's acceptance region.
 Release authority is separated from generation, so the model that produces a number does not decide whether the number is published.
 
 The experiments support the design on four benchmarks.
-Task competence is retained, at \textcolor{blue}{73.00}\% official accuracy on StatQA and 84.67\% on Adult, and empirical coverage is 98.53\%, \textcolor{blue}{84.62}\% and 92.08\% on Adult, California Housing and Carbon Monitor.
-Against publishing every candidate from the same pipeline, the gate reduces the released error rate from \textcolor{blue}{27.00\% to 3.82\%} on StatQA at a \textcolor{blue}{51.66}\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, \textcolor{blue}{attains the lowest released error rate of the compared policies on all three predictive benchmarks, and releases about twice as many StatQA candidates as a gate built on the model's self-reported confidence at a comparable error rate}.
+Task competence is retained, at 73.00\% official accuracy on StatQA and 84.67\% on Adult, and empirical coverage is 98.53\%, 84.62\% and 92.08\% on Adult, California Housing and Carbon Monitor.
+Against publishing every candidate from the same pipeline, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attains the lowest released error rate of the compared policies on all three predictive benchmarks, and releases about twice as many StatQA candidates as a gate built on the model's self-reported confidence at a comparable error rate.
 The ablations show that the reduction is not attributable to a single component.
-Explicit planning raises candidate quality by \textcolor{blue}{7.02} percentage points, removing the gate returns the released error rate to the candidate error rate, and removing calibration \textcolor{blue}{shifts the StatQA gate to a markedly more permissive operating point and leaves it inoperative on Adult and Carbon Monitor}.
+Explicit planning raises candidate quality by 7.02 percentage points, removing the gate returns the released error rate to the candidate error rate, and removing calibration shifts the StatQA gate to a markedly more permissive operating point and leaves it inoperative on Adult and Carbon Monitor.
 The most informative result is on Carbon Monitor, where a width threshold applied to uncalibrated output withholds 11.88\% of forecasts, intercepts none of the errors, and therefore errs more among the forecasts it releases than publishing everything.
-The exchange behind these figures is \textcolor{blue}{stated explicitly}: where the gate costs automation it is reported as such, and the release rate accompanies every reliability figure.
+The exchange behind these figures is stated explicitly: where the gate costs automation it is reported as such, and the release rate accompanies every reliability figure.
 
 Three extensions follow from these results.
 First, the exchangeability assumption should be replaced by online calibration for the forecasting task and by stratified calibration for heterogeneous item pools, so that the guarantee applies to the units on which the decision is actually taken.
-Second, the operating point should \textcolor{blue}{follow from a stated cost ratio}, and the referral should distinguish degrees of review \textcolor{blue}{beyond} the present two levels.
+Second, the operating point should follow from a stated cost ratio, and the referral should distinguish degrees of review beyond the present two levels.
 Third, the workflow should be tested on tasks whose correctness depends on several modelling decisions at once, such as model diagnostics and multiple-testing corrections, where the acceptance region is harder to specify than an error band but where the same separation between generation and release applies.
 
 
-{\color{blue}\section*{Data availability}
-The complete implementation of TrustStatAgent, including the evaluation pipelines, the frozen StatQA candidate outputs, the multi-seed evaluation scripts, and the configuration files underlying every reported figure, is publicly available at \url{https://github.com/Yifei-create/TrustStatAgent}.}
+\section*{Data availability}
+The complete implementation of TrustStatAgent, including the evaluation pipelines, the frozen StatQA candidate outputs, the multi-seed evaluation scripts, and the configuration files underlying every reported figure, is publicly available at \url{https://github.com/Yifei-create/TrustStatAgent}.
 
-{\color{blue}
 \appendix
 
 \section{Raw confusion counts}
@@ -1402,7 +1398,6 @@ The released error rate stays at or below 3.6\% in every category in which any c
         \bottomrule
     \end{tabular}
 \end{table}
-}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
