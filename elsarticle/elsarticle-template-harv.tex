@@ -597,7 +597,7 @@ Actual error is treated as the positive class, and referral for review as a posi
     \centering
     \caption{Confusion matrix for release decisions}
     \label{tab:exp_release_confusion}
-    \footnotesize
+    \small
     \renewcommand{\arraystretch}{1.2}
 
     \begin{tabularx}{\linewidth}{
@@ -856,7 +856,7 @@ Most of the variation reported in Sections~\ref{sec:results_release} and~\ref{se
 \begin{table}[t]
 \centering
 \small
-\caption{Base task performance before any release decision. Metrics are computed over all selected test units and are therefore unaffected by referral. MAE is reported in the unit of the corresponding dataset, as defined by that benchmark. \textcolor{blue}{StatQA entries are means and standard deviations over seven data-splitting seeds; the Adult and Carbon Monitor pipelines are deterministic given the data.} The ReAct accuracy on StatQA is the complement of its recorded released error rate, \textcolor{blue}{28.02}\%, because that entry releases every candidate. Entries marked $\dagger$ coincide with the TrustStatAgent value because the three predictive benchmarks use the same tool adapter and model configuration in every variant (Section~\ref{sec:execution}).}
+\caption{Base task performance before any release decision, computed over all selected test units. MAE is reported in the unit of the corresponding dataset. \textcolor{blue}{StatQA entries are means and standard deviations over seven data-splitting seeds; the Adult and Carbon Monitor pipelines are deterministic given the data.} The ReAct accuracy on StatQA is the complement of its released error rate, because that entry releases every candidate. Entries marked $\dagger$ coincide with the TrustStatAgent value because the predictive benchmarks share the same tool adapter and configuration in every variant (Section~\ref{sec:execution}).}
 \label{tab:base_performance}
 \begin{tabularx}{\linewidth}{@{}lccc@{}}
 \toprule
@@ -897,7 +897,7 @@ The distinction between the width-based condition of Figure~\ref{fig:conformal_c
 \begin{table}[t]
 \centering
 \scriptsize
-\caption{Calibration quality and discrimination of the release decision for TrustStatAgent. Coverage, Eq.~\eqref{eq:exp_coverage}, is computed over all candidates with interpretable calibrated outputs, whereas recall, specificity, and balanced accuracy, Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy}, are computed over the confusion matrix of Table~\ref{tab:exp_release_confusion}. Every row uses the candidate population of the pipeline that produced it, namely the without-gate row of Table~\ref{tab:ablation_results}: \textcolor{blue}{27.00\% on StatQA, 15.33\% on Adult, 4.51\% on California Housing and 3.47\% on Carbon Monitor}. \textcolor{blue}{Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.} The nominal level is selected per task on the validation split. Publishing every candidate attains recall 0, specificity 1, and BA 0.5 on every benchmark. The last column gives the number of correct results withheld per intercepted error.}
+\caption{Calibration quality and discrimination of the release decision for TrustStatAgent. Coverage, Eq.~\eqref{eq:exp_coverage}, is computed over all candidates, and recall, specificity, and balanced accuracy, Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy}, over the confusion matrix of Table~\ref{tab:exp_release_confusion}; the error base rates are those of the without-gate row of Table~\ref{tab:ablation_results}. \textcolor{blue}{Entries are means and standard deviations over the evaluation seeds; point values are exact across seeds.} Publishing every candidate attains recall 0, specificity 1, and BA 0.5. The last column gives the number of correct results withheld per intercepted error.}
 \label{tab:calibration_discrimination}
 \setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\linewidth}{@{}lccccc@{}}
@@ -950,9 +950,9 @@ Self-reported confidence is therefore an informative signal about the model, but
 \toprule
 \textbf{Gating signal} & \textbf{Validation AUC} & \textbf{Release (\%)} & \textbf{Released err. (\%)} & \textbf{BA}\\
 \midrule
-Calibrated score (TrustStatAgent) & 0.939$\pm$0.016 & 51.66$\pm$3.37 & 3.82$\pm$1.04 & 0.803$\pm$0.005\\
-Score + validation threshold & 0.949$\pm$0.012 & 49.20$\pm$2.32 & 3.49$\pm$1.03 & 0.799$\pm$0.013\\
-Self-reported confidence & 0.618$\pm$0.010 & 27.22$\pm$1.59 & 3.57$\pm$1.60 & 0.661$\pm$0.008\\
+Calibrated gate (ours) & 0.939$\pm$0.016 & 51.66$\pm$3.37 & 3.82$\pm$1.04 & 0.803$\pm$0.005\\
+Validation-tuned gate & 0.949$\pm$0.012 & 49.20$\pm$2.32 & 3.49$\pm$1.03 & 0.799$\pm$0.013\\
+Self-reported gate & 0.618$\pm$0.010 & 27.22$\pm$1.59 & 3.57$\pm$1.60 & 0.661$\pm$0.008\\
 \bottomrule
 \end{tabularx}
 }
@@ -1083,7 +1083,7 @@ Carbon Monitor & 100.00 & 3.47 & 88.12 & 3.93 & 77.72 & 3.18\\
 \fill[cHold] (46,-6.42) rectangle (49.1,-6.18);
 \node[anchor=west,font=\footnotesize] at (50,-6.30) {correct withheld};
 \end{tikzpicture}
-\caption{Composition of the release decision. Each block describes one candidate population twice: released without the gate in the upper bar, released through the gate in the lower bar. Bar lengths are percentages of the population. The boundary between error-related and correct-related segments falls at the same position in both bars of a block, so the gate reallocates candidates within a fixed error budget rather than changing it; the numbers are those of Table~\ref{tab:ablation_results}, without-gate row, decomposed with Eqs.~\eqref{eq:exp_release_rate} and~\eqref{eq:exp_released_error_rate}. Segments narrower than five percent are left unlabelled; the four populations contain \textcolor{blue}{27.00}\%, 15.33\%, \textcolor{blue}{4.51}\% and 3.47\% errors, which is the length of the red block in each upper bar. On Carbon Monitor the released error segment (\textcolor{blue}{2.47}\%) is longer than the intercepted one (0.99\%), and the withheld segment (\textcolor{blue}{21.28}\%) is the smallest of the four, so the gate is least active on the benchmark where its detection is weakest.}
+\caption{Composition of the release decision. Each block shows one candidate population twice: released without the gate (upper bar) and through the gate (lower bar); lengths are percentages of the population, decomposed from the without-gate row of Table~\ref{tab:ablation_results}. Segments narrower than five percent are left unlabelled. \textcolor{blue}{The two error segments have the same combined length in both bars of a block, so the gate reallocates candidates within a fixed error budget. On Carbon Monitor the released error segment exceeds the intercepted one, and the gate is least active on the benchmark where its detection is weakest.}}
 \label{fig:candidate_routing}
 \end{figure}
 
@@ -1153,7 +1153,7 @@ This is why the released error rate and the release rate are reported as a pair 
 
 These two properties also define the trade-off that the release decision has to resolve.
 Tightening the tolerance parameter $\Delta$ withholds more results and lowers the released error rate, while loosening it does the reverse.
-The two quantities therefore cannot be improved together by moving a single threshold, and Fig.~\ref{fig:frontier} traces the frontier obtained when $\Delta$ is swept with the rest of the pipeline fixed.
+The two quantities therefore cannot be improved together by moving a single threshold, and Fig.~\ref{fig:frontier} traces the frontier obtained when \textcolor{blue}{the release criterion of each gate} is swept with the rest of the pipeline fixed.
 Read as a frontier, the comparison in Section~\ref{sec:results_release} supports a specific claim.
 \textcolor{blue}{On StatQA the calibrated rule releases 2.46 percentage points more candidates than the conventional one at an error rate that is statistically indistinguishable across seeds, and it dominates the verbalized-confidence gate outright, releasing about twice as many candidates at a comparable error rate.}
 On the other three benchmarks it moves along the frontier rather than pushing it, buying \textcolor{blue}{0.12} to 0.75 percentage points of released error with 2.9 to 10.4 percentage points of automation.
@@ -1239,14 +1239,14 @@ The failure of conventional gating on Carbon Monitor is not a failure of thresho
 \draw[cC,line width=0.9pt] (1.28,6.80) -- (1.38,6.80);
 \node[anchor=west,font=\scriptsize] at (1.41,6.80) {Carbon Monitor};
 \end{tikzpicture}
-\caption{Relative expected cost of the gated policy against publishing everything, as a function of the ratio $\rho=c_e/c_r$ between the cost of a published violation and the cost of one referral. The model is $\rho\,r\,e+(1-r)$ per candidate, with $r$ the release rate and $e$ the released error rate; both quantities are those of Table~\ref{tab:release_behaviour}, so no new measurement enters the figure. Curves cross the break-even line at the values quoted in the text and flatten at $re/p$, the ratio of the two error rates, which is \textcolor{blue}{0.07 on StatQA, 0.10 on Adult, 0.26 on California Housing and 0.71 on Carbon Monitor}. The horizontal axis is logarithmic. On Carbon Monitor the plateau sits close to one, which is the cost form of the finding that its gate buys little: even an unbounded penalty on published errors recovers \textcolor{blue}{less than a third} of the baseline cost.}
+\caption{Relative expected cost of the gated policy against publishing everything, as a function of the cost ratio $\rho=c_e/c_r$. The model is $\rho\,r\,e+(1-r)$ per candidate, with $r$ and $e$ from Table~\ref{tab:release_behaviour}. Curves cross the break-even line at the values quoted in the text and flatten at $re/p$ (\textcolor{blue}{0.07 on StatQA, 0.10 on Adult, 0.26 on California Housing and 0.71 on Carbon Monitor}); the horizontal axis is logarithmic. \textcolor{blue}{The Carbon Monitor plateau sits close to one: even an unbounded penalty on published errors recovers less than a third of the baseline cost.}}
 \label{fig:cost_ratio}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/frontier.png}
-\caption{Released error rate against release rate for the calibrated and conventional policies\textcolor{blue}{, computed under the official benchmark split}. Each curve is obtained by sweeping the tolerance parameter $\Delta$ with the generator, the calibration procedure, and the acceptance region held fixed. On StatQA the calibrated curve lies below the conventional one at equal release rate; on Carbon Monitor the conventional policy lies inside the frontier defined by publishing every candidate.}
+\includegraphics[width=\linewidth]{figures/frontier.pdf}
+\caption{\textcolor{blue}{Released error rate against release rate at the reference configuration: (a) StatQA under the official benchmark split, (b) Carbon Monitor at the reference seed. Each frontier is traced by sweeping the release criterion of the corresponding gate with the generator, the correctness scorer, and the calibration procedure held fixed; the markers give the operating points reported in Table~\ref{tab:release_behaviour}. On StatQA the two frontiers nearly coincide, so the policies differ in how the operating point is selected rather than in the trade-off available, and the verbalized-confidence operating point lies strictly above the frontier. On Carbon Monitor the frontier is erratic under the rolling regime: the validation-tuned operating point sits above the error rate of publishing every candidate, while the calibrated operating point sits below it.}}
 \label{fig:frontier}
 \end{figure}
 
