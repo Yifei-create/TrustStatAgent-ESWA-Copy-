@@ -792,7 +792,7 @@ The ablation variants and their evaluation focus are summarized in Table~\ref{ta
 \section{Results and discussion}
 \label{sec:results}
 
-\subsection{Experimental settings and reporting protocol}
+\subsection{\textcolor{blue}{Experimental settings}}
 \label{sec:results_protocol}
 
 This section reports the four benchmarks in three groups.
@@ -801,16 +801,11 @@ Section~\ref{sec:results_calibration} reports the quality of the calibrated outp
 Sections~\ref{sec:results_release} and~\ref{sec:results_ablation} report the release decisions and the ablations.
 Tables~\ref{tab:base_performance}--\ref{tab:ablation_results} follow this order, and Figures~\ref{fig:conformal_calibration} and~\ref{fig:risk_gating} fix the procedures whose behaviour these tables measure.
 Figures~\ref{fig:candidate_routing}, \ref{fig:cost_ratio} and~\ref{fig:frontier} present the same release decisions in the three forms the discussion relies on, namely their composition, their cost, and their frontier.
-The first two are computed from Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} and introduce no additional measurement; the third requires a sweep of the tolerance parameter and is described where it is used.
+The first two are computed from Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} and introduce no additional measurement; the third requires a sweep of \textcolor{blue}{each gate's release criterion} and is described where it is used.
 
 Release statistics follow the confusion matrix of Table~\ref{tab:exp_release_confusion}, in which an actual violation is the positive class and referral for review is the positive decision, and are computed with Eqs.~\eqref{eq:exp_release_rate} and~\eqref{eq:exp_released_error_rate}.
 Each row of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} is evaluated against the candidate population of the pipeline that produced it, so the released error rate of a row is computed from its own denominator.
-Three recorded quantities determine the release statistics reported below: the release rate $r$, the released error rate $e$, and the candidate error rate $p$ of the pipeline that produced the candidates.
-The four cells of the confusion matrix follow from them as
-$\mathrm{FN}=r\,e$, $\mathrm{TN}=r-\mathrm{FN}$, $\mathrm{TP}=p-\mathrm{FN}$ and $\mathrm{FP}=(1-p)-\mathrm{TN}$,
-each expressed as a fraction of the candidate population.
-Recall, specificity and balanced accuracy in Eqs.~\eqref{eq:exp_recall}--\eqref{eq:exp_balanced_accuracy} are functions of these four cells, as are the relative reductions of Section~\ref{sec:results_release} and the cost thresholds of Section~\ref{sec:results_discussion}.
-\textcolor{blue}{The raw integer counts underlying every confusion matrix are tabulated in \ref{app:counts}, so none of the reported statistics rests on reconstructed quantities.}
+\textcolor{blue}{The raw integer counts underlying every confusion matrix are tabulated in \ref{app:counts}, and recall, specificity, balanced accuracy, the relative reductions of Section~\ref{sec:results_release}, and the cost thresholds of Section~\ref{sec:results_discussion} are all computed from the same counts, so none of the reported statistics rests on reconstructed quantities.}
 \textcolor{blue}{Reported values are means and standard deviations over repeated evaluation seeds.
 For StatQA the language-model candidates are frozen artifacts generated once at temperature zero, and what varies across the seven seeds is the assignment of tasks to the scorer-calibration, conformal-calibration, validation, and test splits: the first seed reuses the stratified split released with the benchmark, and the remaining six reshuffle the assignment with the same per-category ratios.
 For the three predictive benchmarks the fitted pipelines are deterministic given the training data, and the three seeds of the experimental configuration vary only model initialisation and calibration partitioning; metrics whose standard deviation vanishes are reported as point values.}
