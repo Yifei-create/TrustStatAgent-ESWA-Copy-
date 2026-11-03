@@ -51,7 +51,7 @@
 
 %% Abstract
 \begin{abstract}
-Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent: \textcolor{blue}{an LLM} plans the analysis and routes every computation through statistical tools; conformal calibration turns each candidate into an interval or label set with finite-sample coverage; and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is not free: between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review; the release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
+Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent, \textcolor{blue}{in which an LLM} plans the analysis and routes every computation through statistical tools, conformal calibration turns each candidate into an interval or label set with finite-sample coverage, and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is \textcolor{blue}{not free, since} between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review\textcolor{blue}{. The} release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
 \end{abstract}
 
 %%Graphical abstract
@@ -82,7 +82,7 @@ Large language model agents \sep Conformal prediction \sep Risk gating
 
 
 
-Large language models (LLMs) are increasingly deployed as the reasoning core of expert systems. This shift rests on two capabilities. The first is reasoning: chain-of-thought prompting decomposes a difficult problem into intermediate steps and markedly improves arithmetic and symbolic inference~\citep{wei2022chain}, a behaviour that can be triggered without demonstrations~\citep{kojima2022large} and stabilised by sampling and voting~\citep{wang2023self}. The second is acting: ReAct interleaves reasoning traces with calls to external tools~\citep{yao2023react}, and Toolformer shows that the decision of when to invoke an interface can be learned~\citep{schick2023toolformer}.
+Large language models (LLMs) are increasingly deployed as the reasoning core of expert systems. This shift rests on two capabilities. The first is reasoning\textcolor{blue}{. C}hain-of-thought prompting decomposes a difficult problem into intermediate steps and markedly improves arithmetic and symbolic inference~\citep{wei2022chain}, a behaviour that can be triggered without demonstrations~\citep{kojima2022large} and stabilised by sampling and voting~\citep{wang2023self}. The second is acting\textcolor{blue}{. R}eAct interleaves reasoning traces with calls to external tools~\citep{yao2023react}, and Toolformer shows that the decision of when to invoke an interface can be learned~\citep{schick2023toolformer}.
 
 Statistical analysis is among the domains in which this capability matters most, because the work involved, such as fitting models, selecting estimators and reporting intervals, is repetitive and tool-heavy. Interest in delegating such work to LLM-based data agents has therefore grown rapidly~\citep{sun2026survey}. Systematic evaluation nevertheless indicates that the capability gap remains wide. On StatQA, a benchmark of 11{,}623 statistical-analysis items, the strongest model attains only 64.83\% accuracy, and its errors are dominated by method applicability rather than computation~\citep{zhu2024large}. The bottleneck is therefore not arithmetic, which can be delegated to deterministic tools, but the judgement surrounding it.
 
@@ -807,7 +807,7 @@ Release statistics follow the confusion matrix of Table~\ref{tab:exp_release_con
 Each row of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} is evaluated against the candidate population of the pipeline that produced it, so the released error rate of a row is computed from its own denominator.
 \textcolor{blue}{The raw integer counts underlying every confusion matrix are tabulated in \ref{app:counts}, and recall, specificity, balanced accuracy, the relative reductions of Section~\ref{sec:results_release}, and the cost thresholds of Section~\ref{sec:results_discussion} are all computed from the same counts.}
 \textcolor{blue}{Reported values are means and standard deviations over repeated evaluation seeds.
-For StatQA the language-model candidates are frozen artifacts generated once at temperature zero, and what varies across the seven seeds is the assignment of tasks to the scorer-calibration, conformal-calibration, validation, and test splits: the first seed reuses the stratified split released with the benchmark, and the remaining six reshuffle the assignment with the same per-category ratios.
+For StatQA the language-model candidates are frozen artifacts generated once at temperature zero, and what varies across the seven seeds is the assignment of tasks to the scorer-calibration, conformal-calibration, validation, and test splits\textcolor{blue}{. The} first seed reuses the stratified split released with the benchmark, and the remaining six reshuffle the assignment with the same per-category ratios.
 For the three predictive benchmarks the fitted pipelines are deterministic given the training data, and the three seeds of the experimental configuration vary only model initialisation and calibration partitioning; metrics whose standard deviation vanishes are reported as point values.}
 Empirical coverage in Section~\ref{sec:results_calibration} is a separate measurement and is not derived from these three quantities.
 Base metrics cover all selected test units, so a high accuracy cannot arise from withholding difficult cases.
@@ -833,14 +833,12 @@ Because the three modules operate after a candidate has been produced, these met
 
 TrustStatAgent attains an official accuracy of \textcolor{blue}{73.00$\pm$1.72}\% on StatQA, an accuracy of 84.67\% on Adult, a mean absolute error of \textcolor{blue}{0.3143$\pm$0.0006} on California Housing, and 306.10 on Carbon Monitor.
 The first of these is \textcolor{blue}{7.02} percentage points above the same pipeline without explicit planning (Table~\ref{tab:ablation_results}), and it is above the 64.83\% reported by \citet{zhu2024large} for the strongest model \textcolor{blue}{evaluated on the same mini-StatQA subset}.
-The latter comparison is not strict.
-The present setting supplies a data schema and restricts the analysis to a small fixed set of statistical tools, as illustrated by the workflow of Figure~\ref{fig:planning_execution}, which removes part of the method-selection burden that the benchmark identifies as the dominant error source.
-It supports the claim that a tool-restricted agent operates in the regime the benchmark targets; it does not show that the agent surpasses unaided reasoning on the benchmark as originally posed.
+\textcolor{blue}{The comparison is indicative only, since the present setting supplies a data schema and restricts the analysis to a small fixed set of statistical tools (Figure~\ref{fig:planning_execution}), which removes part of the method-selection burden that the benchmark identifies as the dominant error source.}
 
 The three predictive benchmarks share one statistical tool adapter and one fixed model configuration across methods (Section~\ref{sec:execution}).
 \textcolor{blue}{The ReAct and TrustStatAgent pipelines therefore produce identical candidates on these benchmarks, at 15.33\%, 4.51$\pm$0.09\%, and 3.47\% error, and differ only in the release rule.}
 On StatQA, where planning changes the analysis itself, the ReAct pipeline releases every candidate at a recorded error rate of \textcolor{blue}{28.02$\pm$1.39}\%, which corresponds to \textcolor{blue}{71.98}\% correctness against \textcolor{blue}{73.00}\% for the full pipeline.
-That difference is worth recording because it is the largest benchmark on which the two pipelines differ in what they compute rather than in what they publish.
+\textcolor{blue}{This is the one benchmark on which the two pipelines differ in what they compute, not only in what they publish.}
 
 The same table fixes the population on which the gate has to work.
 The candidate error rate of the full pipeline is \textcolor{blue}{27.00$\pm$1.72}\% on StatQA, 15.33\% on Adult, \textcolor{blue}{4.51$\pm$0.09}\% on California Housing, and 3.47\% on Carbon Monitor, a range of almost one order of magnitude.
@@ -886,7 +884,7 @@ Coverage and released correctness diverge, and they diverge in opposite directio
 On California Housing coverage is \textcolor{blue}{84.62}\% while released correctness is 98.13\%.
 Release there requires both endpoints of the calibrated interval to lie inside the tolerance band of Eq.~\eqref{eq:numerical_acceptance_set}, so only candidates with a narrow interval, and therefore a small error, reach publication.
 On Adult the order reverses, with coverage at 98.53\% and released correctness at 97.28\%.
-Release there requires the calibrated set to equal the predicted-class singleton, Eq.~\eqref{eq:categorical_prediction_set}, which \textcolor{blue}{responds to ambiguity: a confident singleton is not necessarily a correct one}.
+Release there requires the calibrated set to equal the predicted-class singleton, Eq.~\eqref{eq:categorical_prediction_set}, which \textcolor{blue}{responds to ambiguity, and a confident singleton is not necessarily a correct one}.
 The distinction between the width-based condition of Figure~\ref{fig:conformal_calibration}A and the singleton-based condition of Figure~\ref{fig:conformal_calibration}B accounts for most of the differences in gate performance reported below.
 
 \begin{table}[t]
@@ -915,7 +913,7 @@ Publishing every candidate reproduces the candidate error rate of the pipeline t
 The two baselines of Tables~\ref{tab:release_behaviour} and~\ref{tab:ablation_results} differ by \textcolor{blue}{1.02} percentage points on StatQA \textcolor{blue}{and coincide on the predictive benchmarks}, because they are the same policy applied to the ReAct and full candidate pools, as Section~\ref{sec:results_base} explains.
 Figure~\ref{fig:risk_gating} shows the routing that produces these numbers: a candidate is released only when execution succeeds, the uncertainty output is valid, and the acceptance test of Table~\ref{tab:calibrated_release_conditions} is met, and every referred candidate carries the condition it failed.
 Figure~\ref{fig:candidate_routing} decomposes the same decision into the four outcomes of the confusion matrix of Table~\ref{tab:exp_release_confusion}.
-Each block describes one candidate population twice: it is first released without the gate and then passed through it.
+Each block describes one candidate population twice\textcolor{blue}{, first} released without the gate and then passed through it.
 Because the boundary between error-related and correct-related segments falls at the same position in both bars, the figure shows that the gate reallocates candidates within a fixed error budget \textcolor{blue}{while leaving the budget itself unchanged}.
 What differs across benchmarks is where the reallocation lands, and that is the subject of the rest of this section.
 
@@ -1107,7 +1105,7 @@ Calibration therefore contributes least where the uncalibrated interval is alrea
 The two reliability modules are complementary\textcolor{blue}{; neither can substitute for the other}.
 Calibration supplies a scale on which a violation can be measured, and the gate turns that scale into a decision.
 Calibration alone does not decide publication, since a valid interval can still fall outside the tolerance band; gating without calibration has no quantity to threshold, which is why two of the three predictive benchmarks collapse to release-all.
-The behaviour of conventional gating on Carbon Monitor agrees with this reading: it is a gate applied to an uncalibrated scale, and it intercepts nothing when that scale stops tracking the error.
+The behaviour of conventional gating on Carbon Monitor agrees with this reading\textcolor{blue}{. It} is a gate applied to an uncalibrated scale, and it intercepts nothing when that scale stops tracking the error.
 
 \begin{table}[t]
 \centering
@@ -1152,7 +1150,7 @@ The two quantities therefore cannot be improved together by moving a single thre
 Read as a frontier, the comparison in Section~\ref{sec:results_release} supports a specific claim.
 \textcolor{blue}{On StatQA the calibrated rule releases 2.46 percentage points more candidates than the conventional one at an error rate that is statistically indistinguishable across seeds, and it dominates the verbalized-confidence gate outright, releasing about twice as many candidates at a comparable error rate.}
 On the other three benchmarks it moves along the frontier \textcolor{blue}{without pushing it outward}, buying \textcolor{blue}{0.12} to 0.75 percentage points of released error with 2.9 to 10.4 percentage points of automation.
-On Carbon Monitor the conventional policy is not on the frontier at all: it releases less than publishing everything and errs more, because it intercepts no violations.
+On Carbon Monitor the conventional policy is not on the frontier at all\textcolor{blue}{. It} releases less than publishing everything and errs more, because it intercepts no violations.
 A point of that kind cannot be a conservative choice; it is a threshold applied to the wrong quantity.
 
 The relative weight of the two quantities \textcolor{blue}{belongs to the deployment}.
@@ -1180,7 +1178,7 @@ Conformal language modelling constructs output sets with coverage guarantees \ci
 The difference is in what the calibrated quantity is attached to.
 In those settings the conformal set describes the uncertainty of a generated answer; here it describes the uncertainty of a computational result whose execution can also be checked, and the release rule of Eq.~\eqref{eq:unified_release_gate} requires both.
 That combination has a practical consequence.
-The failure of conventional gating on Carbon Monitor is not a failure of threshold tuning but of applying a width signal to a quantity that no longer tracks the error, which is the condition that an execution-grounded calibration can register.
+\textcolor{blue}{On Carbon Monitor, conventional gating fails because its width signal no longer tracks the error, a condition that threshold tuning cannot repair and that an execution-grounded calibration can register.}
 
 \begin{figure}[t]
 \centering
@@ -1258,7 +1256,7 @@ The nominal coverage level of each task is a configuration entry selected on the
 Two scope conditions remain.
 The StatQA comparison with conventional gating is a tie in error control: the released error rates overlap across seeds, 3.82$\pm$1.04\% against 3.49$\pm$1.03\%, and the case for the calibrated rule on that benchmark rests on its higher release rate, its large margin over verbalized-confidence gating, and the finite-sample basis of its operating point.
 And the language-model candidates are generated once at temperature zero and then frozen, so the repetition varies the evaluation protocol, not the generator itself.
-The conclusions therefore rest on the effects that persist across seeds: the order-of-magnitude reduction against unrestricted publication, the lowest released error rate on all three predictive benchmarks, and the complete failure of the conventional rule on Carbon Monitor.}
+The conclusions therefore rest on the effects that persist across seeds\textcolor{blue}{, namely} the order-of-magnitude reduction against unrestricted publication, the lowest released error rate on all three predictive benchmarks, and the complete failure of the conventional rule on Carbon Monitor.}
 The tolerance parameter $\Delta$ is \textcolor{blue}{fixed in advance, not learned}, and Fig.~\ref{fig:frontier} characterises its effect along one axis only, so a sensitivity analysis across tasks is still needed before the operating point can be recommended as a default.
 Finally, the StatQA correctness scorer is a TF--IDF logistic regression frozen after training on a dedicated split (Section~\ref{sec:execution}).
 This removes judge noise from the present study and means that the calibration target would have to be re-established wherever correctness is adjudicated by a different rule or by a model.
@@ -1267,8 +1265,8 @@ This removes judge noise from the present study and means that the calibration t
 \label{sec:conclusion}
 
 This paper addressed the point at which a statistical agent stops producing a result and starts publishing one.
-The difficulty is not computational, since a tool can fit a model and a language model can plan which model to fit.
-It is that an uncalibrated confidence score gives no finite-sample basis for deciding whether a particular result is safe to release, and that a reliability criterion taken alone can be satisfied by publishing nothing.
+\textcolor{blue}{The difficulty lies outside computation, since a tool can fit a model and a language model can plan which model to fit.
+An uncalibrated confidence score gives no finite-sample basis for deciding whether a particular result is safe to release, and a reliability criterion taken alone can be satisfied by publishing nothing.}
 We therefore treated statistical accuracy and publishing reliability as a joint objective and proposed TrustStatAgent.
 A tool-restricted planner produces candidates, conformal calibration attaches a coverage statement to each candidate, and a deterministic gate releases only those results whose execution is compliant and whose calibrated output lies inside the task's acceptance region.
 Release authority is separated from generation, so the model that produces a number does not decide whether the number is published.
