@@ -51,7 +51,7 @@
 
 %% Abstract
 \begin{abstract}
-Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent: a tool-restricted LLM plans the analysis and routes every computation through statistical tools; conformal calibration turns each candidate into an interval or label set with finite-sample coverage; and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is not free: between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review; the release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
+Delegating statistical analysis to large language model (LLM) agents is attractive because the work is repetitive and tool-heavy, but an erroneous result is consumed downstream as a fact. Existing pipelines leave the release decision to the user or to a validation-tuned confidence threshold, which carries no finite-sample guarantee and, on the forecasting task, is outperformed by publishing everything. This paper presents TrustStatAgent: \textcolor{blue}{an LLM} plans the analysis and routes every computation through statistical tools; conformal calibration turns each candidate into an interval or label set with finite-sample coverage; and a deterministic gate releases a result only when its execution checks pass and its calibrated output lies inside the task's acceptance region, referring the rest to human review. \textcolor{blue}{On four benchmarks covering question answering, classification, regression and forecasting, evaluated over repeated data-splitting seeds, the gate reduces the released error rate from 27.00\% to 3.82\% on StatQA at a 51.66\% release rate and from 15.33\% to 2.72\% on Adult at 54.29\%, attaining the lowest released error rate on all three predictive benchmarks. Against gating on self-reported confidence, it releases twice as many StatQA candidates at a comparable error rate, since a trained correctness score separates right from wrong answers far better (validation AUC 0.94 against 0.62). Base accuracy is retained at 73.00\% and 84.67\%.} The gain is not free: between 22.28\% and \textcolor{blue}{48.34\%} of results are referred for review; the release rate accompanies every reliability figure, so the exchange can be weighed against deployment costs.
 \end{abstract}
 
 %%Graphical abstract
@@ -61,17 +61,17 @@ Delegating statistical analysis to large language model (LLM) agents is attracti
 
 %%Research highlights
 \begin{highlights}
-\item \textcolor{blue}{A statistical agent that separates result generation from result release}
-\item \textcolor{blue}{Conformal calibration attaches finite-sample coverage to each result}
-\item \textcolor{blue}{A deterministic gate releases only results inside acceptance regions}
-\item \textcolor{blue}{Released error falls from 27.00\% to 3.82\% on StatQA at 51.66\% release}
-\item \textcolor{blue}{On Carbon Monitor, conventional gating intercepts no error at all}
+\item \textcolor{blue}{An LLM statistical agent that decides not only what to compute but what to publish}
+\item \textcolor{blue}{Conformal calibration gives every result a finite-sample coverage guarantee}
+\item \textcolor{blue}{A deterministic gate makes every release decision auditable, outside the LLM}
+\item \textcolor{blue}{Released error falls from 27\% to 3.8\% on StatQA while releasing 51.7\% of results}
+\item \textcolor{blue}{On carbon forecasting, validation-tuned gating is worse than publishing everything}
 \end{highlights}
 
 %% Keywords
 \begin{keyword}
 {\color{blue}
-Large language model agents \sep Conformal prediction \sep Selective prediction \sep Uncertainty quantification \sep Statistical analysis \sep Risk control
+Large language model agents \sep Conformal prediction \sep Risk gating
 }
 \end{keyword}
 
